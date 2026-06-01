@@ -55,6 +55,46 @@ input {
   padding: 32px 0 56px;
 }
 
+.top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 18px;
+  padding: 14px 18px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(8, 26, 34, 0.66);
+  backdrop-filter: blur(18px);
+  box-shadow: var(--shadow);
+}
+
+.brand-chip,
+.top-nav-links a {
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.brand-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 38px;
+  padding: 0 14px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--brand-orange), #ffb15e);
+  color: #1f1308;
+}
+
+.top-nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+
+.top-nav-links a {
+  color: #d7ebef;
+}
+
 .hero,
 .panel,
 .metric-card {
@@ -206,15 +246,42 @@ h1 {
 }
 
 .hero-panel {
+  display: grid;
+  gap: 16px;
   padding: 24px;
 }
 
 .status-card {
-  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 18px;
+}
+
+.care-card {
+  padding: 20px;
+  border: 1px solid rgba(241, 139, 43, 0.22);
+  border-radius: var(--radius-lg);
+  background:
+    linear-gradient(180deg, rgba(241, 139, 43, 0.12), rgba(255, 255, 255, 0.03)),
+    rgba(10, 30, 39, 0.9);
+}
+
+.care-card h3 {
+  margin-top: 2px;
+  font-size: 1.4rem;
+}
+
+.care-card p {
+  margin: 12px 0 0;
+}
+
+.care-list {
+  margin: 14px 0 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 8px;
+  color: #f5efe7;
 }
 
 .status-topline,
@@ -582,6 +649,10 @@ h1 {
 }
 
 @media (max-width: 1080px) {
+  .top-nav {
+    border-radius: 24px;
+  }
+
   .hero,
   .panel-grid,
   .panel-grid-wide,
@@ -613,12 +684,26 @@ h1 {
   .search-field input {
     width: 100%;
   }
+
+  .top-nav-links {
+    gap: 12px;
+  }
 }
 
 @media (max-width: 680px) {
   .page-shell {
     width: min(100vw - 18px, 100%);
     padding: 18px 0 32px;
+  }
+
+  .top-nav {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .top-nav-links {
+    width: 100%;
+    justify-content: space-between;
   }
 
   h1 {
