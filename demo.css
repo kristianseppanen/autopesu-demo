@@ -497,6 +497,128 @@ h1 {
   gap: 10px;
 }
 
+.field-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.field-card,
+.chem-card,
+.learning-card {
+  padding: 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.field-card {
+  display: grid;
+  gap: 6px;
+}
+
+.field-card span,
+.chem-card span {
+  color: var(--muted);
+  font-size: 0.84rem;
+}
+
+.field-card strong {
+  font-size: 0.98rem;
+}
+
+.field-card.is-warning {
+  border-color: rgba(241, 139, 43, 0.28);
+  background: rgba(241, 139, 43, 0.08);
+}
+
+.chem-list {
+  display: grid;
+  gap: 12px;
+}
+
+.chem-card {
+  display: grid;
+  gap: 14px;
+}
+
+.chem-card.is-warning {
+  border-color: rgba(241, 139, 43, 0.28);
+  background:
+    linear-gradient(180deg, rgba(241, 139, 43, 0.12), rgba(255, 255, 255, 0.03)),
+    rgba(255, 255, 255, 0.03);
+}
+
+.chem-card-head,
+.chem-metrics {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.chem-card-head strong,
+.chem-metrics strong {
+  display: block;
+}
+
+.chem-metrics div {
+  flex: 1;
+  padding: 12px;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.chem-badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  padding: 0 12px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.chem-badge-ok {
+  color: var(--ok);
+  background: rgba(126, 227, 164, 0.14);
+}
+
+.chem-badge-warning {
+  color: #ffd1a4;
+  background: rgba(241, 139, 43, 0.16);
+}
+
+.learning-card h4 {
+  font-size: 1.1rem;
+}
+
+.learning-card p {
+  margin: 10px 0 0;
+}
+
+.micro-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.micro-nav-button {
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.03);
+  cursor: pointer;
+}
+
+.micro-nav-button.is-active {
+  color: #1d1107;
+  border-color: transparent;
+  background: linear-gradient(135deg, var(--brand-orange), #ffb15e);
+}
+
 .handover-note,
 .pitch-box,
 .escalation-box,
@@ -687,6 +809,10 @@ h1 {
 
   .top-nav-links {
     gap: 12px;
+  }
+
+  .field-grid {
+    grid-template-columns: 1fr;
   }
 }
 

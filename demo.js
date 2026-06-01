@@ -1,176 +1,229 @@
 const checklistItems = [
   {
-    id: "electrical",
-    title: "Sähkösyöttö ja suojaukset tarkastettu",
-    description: "Pääsyöttö, sulakkeet, turvakytkin ja maadoitus mitattu dokumentoidusti.",
-    critical: true,
-    done: true,
-  },
-  {
-    id: "drawings",
-    title: "Sähkökuvat päivitetty kohdekohtaisiksi",
-    description: "Kaaviot vastaavat toteutusta ja ovat huollon käytettävissä.",
+    id: "site",
+    title: "Kohdetiedot, laitemalli ja sarjanumero kirjattu",
+    description: "Perustiedot talteen samaan runkoon myöhempää huoltoa ja muutoksia varten.",
     critical: true,
     done: true,
   },
   {
     id: "software",
-    title: "Pesuohjelmisto asennettu ja testattu",
-    description: "Perusohjelmat, maksutavat ja etäyhteys validoitu testitapahtumilla.",
+    title: "Ohjelmistoversio ja parametrimuutokset dokumentoitu",
+    description: "Asennettu versio, tehdyt muutokset ja käyttöönoton poikkeamat näkyvät jälkikäteen.",
     critical: true,
     done: true,
   },
   {
-    id: "safety",
-    title: "Hätäseis- ja turvapiirit testattu",
-    description: "Kaikki turvatoiminnot testattu kuormitetusti ja kirjattu pöytäkirjaan.",
+    id: "electrical",
+    title: "Sähkömittaukset ja suojaukset tallennettu",
+    description: "Syöttö, suojaukset, maadoitus ja turvapiirit mitattu sekä kirjattu.",
+    critical: true,
+    done: true,
+  },
+  {
+    id: "channels",
+    title: "Kemikaalikanavat nimetty ja annostelupumput ilmattu",
+    description: "Esipesu, shampoo, vaha ja vannepesu tunnistettu ja ilma poistettu linjoista.",
+    critical: true,
+    done: true,
+  },
+  {
+    id: "chemistry",
+    title: "Pesukemian annostelu mitattu ja säädetty",
+    description: "Jokaisesta kanavasta on tavoitearvo, mitattu arvo ja dokumentoitu lopputulos.",
     critical: true,
     done: false,
   },
   {
-    id: "dosing",
-    title: "Kemikaaliannostelu mitattu ja säädetty",
-    description: "Annostelupisteet, mittaustulokset ja lopulliset arvot tallennettu.",
+    id: "washresult",
+    title: "Testipesu hyväksytty ja havainto kirjattu",
+    description: "Pesutulos arvioitu, poikkeamat kirjattu ja tarvittaessa tehty lisäsäätö.",
     critical: true,
+    done: false,
+  },
+  {
+    id: "photos",
+    title: "Valokuvat, tyyppikilvet ja kohdekuvat tallennettu",
+    description: "Valokuvat tukevat myöhempää huoltoa ja varaosien tunnistamista.",
+    critical: false,
     done: false,
   },
   {
     id: "handover",
-    title: "Käyttökoulutus pidetty asiakkaalle",
-    description: "Päivittäiset toimet, hälytykset ja huollon yhteyspolku käyty läpi.",
+    title: "Asiakkaan luovutus ja käyttöopastus tehty",
+    description: "Päivittäiset toimet, hälytykset ja huoltokäytännöt käyty läpi.",
     critical: false,
     done: true,
   },
   {
-    id: "photos",
-    title: "Valokuvat ja luovutusdokumentit arkistoitu",
-    description: "Kohdekuvat, tyyppikilvet ja lopulliset dokumentit ladattu talteen.",
-    critical: false,
-    done: false,
+    id: "remote",
+    title: "Etäyhteys ja tietopankkilinkit testattu",
+    description: "Huolto pääsee oikeaan aineistoon ilman erillistä tiedonmetsästystä.",
+    critical: true,
+    done: true,
+  },
+];
+
+const documentationFields = [
+  { label: "Kohde", value: "SmartCare Mock 01 / ABC Pesula", warning: false },
+  { label: "Laitemalli", value: "SmartCare mock / sarjanumero SC-240601", warning: false },
+  { label: "Ohjelmistoversio", value: "Wash control 4.8.2", warning: false },
+  { label: "Sähkömittaukset", value: "OK, tallennettu pöytäkirjaan", warning: false },
+  { label: "Parametrimuutokset", value: "Kuivaus +8 %, vahaohjelma päivitetty", warning: false },
+  { label: "Pesukemian mittaus", value: "Vahakanava poikkeaa tavoitearvosta", warning: true },
+  { label: "Valokuvat", value: "Kohdekuvat puuttuvat vielä", warning: true },
+  { label: "Luovutustila", value: "Täydennettävä ennen luovutusta", warning: true },
+];
+
+const chemistryChannels = [
+  {
+    name: "Esipesu",
+    product: "Prewash Active",
+    target: "24 ml/min",
+    measured: "23 ml/min",
+    status: "OK",
+    note: "Pieni poikkeama, ei vaadi säätöä.",
+  },
+  {
+    name: "Shampoo",
+    product: "Foam Clean",
+    target: "32 ml/min",
+    measured: "31 ml/min",
+    status: "OK",
+    note: "Pesuvaahdon määrä vastaa tavoitetta.",
+  },
+  {
+    name: "Vaha",
+    product: "Shine Shield",
+    target: "18 ml/min",
+    measured: "11 ml/min",
+    status: "Säädä",
+    note: "Todennäköinen syy heikkoon kuivaukseen ja kiiltoon.",
+  },
+  {
+    name: "Vannepesu",
+    product: "Wheel Clean Pro",
+    target: "16 ml/min",
+    measured: "16 ml/min",
+    status: "OK",
+    note: "Ei poikkeamaa mittauksessa.",
   },
 ];
 
 const scenarios = [
   {
-    id: "payment",
-    title: "Maksupääte offline",
-    subtitle: "Yleinen yhteys- tai päätelaiteongelma",
+    id: "wax",
+    title: "Pesutulos heikko vahauksen jälkeen",
+    subtitle: "Kuivauspisaroita ja heikko kiilto testipesussa",
     intro:
-      "Huolto käy läpi verkko-, päätelaite- ja ohjelmistotarkastukset ennen kuin asia nostetaan eteenpäin.",
+      "Kuivauspisarat jäävät pintaan ja kiilto on heikko. Ennen komponenttien vaihtoa tarkistetaan vaha-kanavan todellinen tuotto.",
     steps: [
-      "Tarkista modeemin ja kytkimen virrat sekä linkkivalot.",
-      "Vahvista päätelaitteen IP-osoite ja yhteystesti huoltosivulta.",
-      "Aja yksi testimaksu ja tallenna virhekoodi lokiin.",
+      "Mittaa vaha-kanavan todellinen tuotto 30 sekunnin testijaksolla.",
+      "Ilmaa letku ja tarkista mahdollinen ilmavuoto tai tukos.",
+      "Säädä annosteluasetus tavoitearvoon ja aja uusi testipesu.",
+      "Kirjaa uusi arvo ja havainto tietopankkiin luovutuksen liitteeksi.",
     ],
     escalation:
-      "päätelaite on online, loki on kerätty ja maksutapahtuma epäonnistuu silti kahdessa peräkkäisessä testissä.",
+      "kanava on ilmattu, annostelu säädetty tavoitearvoon ja testipesun jälkeen pesutulos on edelleen heikko.",
     result:
-      "Huolto pystyy palauttamaan yhteyden useimmissa tapauksissa ilman lisäeskalointia.",
-    outcome: "Ratkeaa huollossa",
-    time: "Arvioitu käsittely: 12 min",
-    supportRatio: "3/4",
-  },
-  {
-    id: "program",
-    title: "Pesuohjelma ei käynnisty",
-    subtitle: "PLC-, turvapiiri- tai kuittauspoikkeama",
-    intro:
-      "Tässä polussa huolto sulkee pois turvapiirin, käyttöliittymän ja ohjelmavalinnan virheet ennen asiantuntijatukea.",
-    steps: [
-      "Tarkista hätäseis, rajakytkimet ja turvapiirin palautuminen.",
-      "Varmista käyttöliittymästä ohjelman tila ja viimeisin hälytys.",
-      "Käynnistä huoltotesti ja kirjaa PLC:n I/O-tila kuvakaappauksena.",
-    ],
-    escalation:
-      "turvapiiri on ehjä ja I/O-data osoittaa PLC-logiikan poikkeaman tai ohjelmamuutostarpeen.",
-    result:
-      "Huolto ratkaisee mekaaniset ja kuittaukseen liittyvät syyt, mutta logiikkapoikkeamat nousevat asiantuntijalle.",
-    outcome: "Eskaloi asiantuntijalle",
-    time: "Arvioitu käsittely: 18 min",
-    supportRatio: "2/4",
-  },
-  {
-    id: "chem",
-    title: "Kemikaaliannostelu poikkeaa",
-    subtitle: "Mittausta ja säätöä vaativa laatuongelma",
-    intro:
-      "Huolto saa mitatun etenemispolun, jotta annostelun säätö tehdään samalla tavalla kaikissa kohteissa.",
-    steps: [
-      "Tarkista letkut, suodattimet ja mahdolliset ilmavuodot.",
-      "Mittaa annostelumäärä 30 sekunnin testijaksolla.",
-      "Vertaa tulosta kohdekohtaiseen tavoitearvoon ja säädä pumppua.",
-    ],
-    escalation:
-      "mittaustulos poikkeaa edelleen tavoitearvosta säädön jälkeen tai kemikaalikanava ei reagoi asetuksiin.",
-    result:
-      "Useimmat poikkeamat ratkeavat paikallisella mittauksella ja säädöllä ilman soittoa eteenpäin.",
-    outcome: "Ratkeaa huollossa",
+      "Useimmat tapaukset ratkeavat mittaamalla todellinen tuotto, säätämällä arvo kohdalleen ja kirjaamalla uusi asetus dokumentaatioon.",
+    outcome: "Säädä ja dokumentoi",
     time: "Arvioitu käsittely: 15 min",
     supportRatio: "3/4",
+    learningTitle: "Heikko kuivaus / kiilto",
+    learningText:
+      "Mittaa vaha-kanavan todellinen tuotto ennen komponenttien vaihtoa. Tarkista myös ilma letkussa, säädä annostelu ja kirjaa uusi arvo dokumentaatioon.",
   },
   {
-    id: "remote",
-    title: "Etäyhteys puuttuu käyttöönotossa",
-    subtitle: "Kriittinen ennen luovutusta",
+    id: "prewash",
+    title: "Esipesu ei irrota likaa riittävästi",
+    subtitle: "Pesutulos jää harmaaksi jo esipesuvaiheessa",
     intro:
-      "Etäyhteys varmistetaan ennen luovutusta, jotta myöhemmät tukitilanteet voidaan hoitaa tehokkaasti.",
+      "Pesutulos viittaa usein annosteluun, suuttimen kuntoon tai väärään ohjelma-arvoon, ei välttämättä sähkövikaan.",
     steps: [
-      "Tarkista reitittimen WAN-yhteys ja SIM-kortin tila.",
-      "Varmista VPN- tai etäpalvelun tunnukset ja laite-ID.",
-      "Aja testikirjautuminen dokumentointinäkymästä ja tallenna loki.",
+      "Varmista esipesuaineen kanava, letkut ja suuttimen puhtaus.",
+      "Mittaa esipesun todellinen tuotto ja vertaa tavoitearvoon.",
+      "Tarkista ohjelmasta oikea esipesuaika ja annostelupiste.",
+      "Kirjaa lopullinen arvo ja tee vertailutestipesu.",
     ],
     escalation:
-      "WAN-yhteys on kunnossa, tunnukset oikein ja etäpalvelu silti hylkää yhteyden tai laite ei rekisteröidy.",
+      "suutin, letkut ja annostelu ovat kunnossa mutta pesutulos jää silti poikkeavaksi useassa testipesussa.",
     result:
-      "Kun perustarkastukset ovat tehty, asiantuntija saa valmiin aineiston eikä aikaa kulu peruskyselyyn.",
-    outcome: "Eskaloi asiantuntijalle",
+      "Yleisin juurisyy löytyy annostelusta tai ohjelma-ajasta, jolloin tapaus ratkeaa huollossa ilman lisäeskalointia.",
+    outcome: "Ratkeaa huollossa",
     time: "Arvioitu käsittely: 14 min",
-    supportRatio: "2/4",
+    supportRatio: "4/4",
+    learningTitle: "Esipesu jää tehottomaksi",
+    learningText:
+      "Tarkista esipesusuutin ja mittaa tuotto ennen kuin epäilet kemikaalia tai ohjelmistovirhettä. Vertailupesun havainto kannattaa kirjata samaan käyttöönottorunkoon.",
+  },
+  {
+    id: "foam",
+    title: "Shampoon vaahto jää ohueksi",
+    subtitle: "Asiakas kokee pesun näyttävän vajaalta",
+    intro:
+      "Vaahto-ongelma voi olla annostelun lisäksi näyttölaatuun vaikuttava asiakaskokemusasia, joten dokumentointi on tärkeää myös myynnille.",
+    steps: [
+      "Tarkista shampoo-kanavan tuotto ja ilmansekoitus.",
+      "Varmista ettei kemikaalisäiliö ole lähes tyhjä tai syöttöletku vuoda.",
+      "Aja visuaalinen testipesu ja vertaile vaahtokerrosta tavoitetasoon.",
+      "Kirjaa muutos, jotta myöhemmin nähdään millä arvolla hyväksytty tulos saavutettiin.",
+    ],
+    escalation:
+      "tuotto on oikea mutta vaahtokuva jää silti poikkeavaksi ja vaikuttaa pesutulokseen tai asiakaskokemukseen.",
+    result:
+      "Dokumentoitu vertailutulos auttaa erottamaan oikean laatuongelman normaalista vaihtelusta.",
+    outcome: "Ratkeaa huollossa",
+    time: "Arvioitu käsittely: 12 min",
+    supportRatio: "4/4",
+    learningTitle: "Vaahto näyttää heikolta",
+    learningText:
+      "Kirjaa myös visuaalinen havainto, ei vain ml/min-arvo. Näin seuraava huoltaja näkee, millä säädöllä hyväksytty vaahtotaso saavutettiin.",
   },
 ];
 
 const documents = [
   {
-    title: "Käyttöönoton päächecklist",
+    title: "Käyttöönoton dokumentointipohja",
     category: "Käyttöönotto",
-    audience: "Asennus / Tuoteasiantuntija",
-    detail: "Vaiheet sähköistyksestä luovutukseen. Sisältää pakolliset mittaukset ja hyväksynnät.",
-    tags: ["käyttöönotto", "checklist", "luovutus"],
+    audience: "Tuoteasiantuntija / Asennus",
+    detail: "Kohdetiedot, sarjanumerot, ohjelmistoversiot, mittaukset, parametrit, kuvat ja luovutushuomiot.",
+    tags: ["käyttöönotto", "dokumentaatio", "luovutus"],
   },
   {
-    title: "Kemikaaliannostelun mittausohje",
-    category: "Huolto",
+    title: "Pesukemian mittaus- ja säätöohje",
+    category: "Kemia",
     audience: "Huolto",
-    detail: "Vakioitu mittaus- ja säätöpolku, jolla poikkeamat saadaan ratkaistua ilman arvaamista.",
-    tags: ["annostelu", "kemikaali", "mittaus"],
+    detail: "Tavoitearvot, mittausjakso, ilmauksen tarkastus ja dokumentoitavat havainnot kaikille kanaville.",
+    tags: ["kemia", "annostelu", "mittaus"],
   },
   {
-    title: "PLC-hälytykset ja ensitoimet",
-    category: "Vianhaku",
-    audience: "Huolto / Tuoteasiantuntija",
-    detail: "Yleisimpien hälytysten tulkinta, tarvittavat tarkastukset ja eskalointiraja.",
-    tags: ["plc", "hälytys", "vianhaku"],
+    title: "Vaha-kanavan poikkeama: mikro-ohje huollolle",
+    category: "Mikro-ohje",
+    audience: "Huolto",
+    detail: "Mittaa todellinen tuotto ennen komponenttien vaihtoa. Ilmaa, säädä, testaa ja kirjaa uusi arvo.",
+    tags: ["vaha", "kiilto", "kuivaus"],
   },
   {
-    title: "Etäyhteyden käyttöönotto-ohje",
-    category: "Käyttöönotto",
-    audience: "Asennus / Huolto",
-    detail: "Yhteydet, tunnukset, lokit ja testaus ennen kohteen luovutusta.",
-    tags: ["vpn", "reititin", "etäyhteys"],
-  },
-  {
-    title: "Päämiehen tekniset tiedotteet",
+    title: "Päämiehen kemikaalikanavien asetustaulukko",
     category: "Päämies",
     audience: "Tuoteasiantuntija",
-    detail: "Versionumerot, ohjelmistopäivitykset ja muutokset, jotka vaikuttavat kenttäkohteisiin.",
-    tags: ["päämies", "päivitys", "ohjelmisto"],
+    detail: "Valmistajan ohjearvot kemikaalikanaville, ohjelma-asetuksille ja testipesulle.",
+    tags: ["päämies", "asetus", "washtec"],
   },
   {
-    title: "Huollon eskalointipaketti",
-    category: "Vianhaku",
-    audience: "Huolto",
-    detail: "Mitä tietoa kerätään ennen soittoa: lokit, kuvat, mittaukset ja testitulos.",
-    tags: ["escalation", "lokit", "kuvat"],
+    title: "Kohdekuvat ja tyyppikilvet",
+    category: "Dokumentit",
+    audience: "Huolto / Varaosat",
+    detail: "Valokuvat helpottavat myöhempää huoltoa, varaosien tunnistusta ja muutosten jäljitystä.",
+    tags: ["kuvat", "tyyppikilpi", "kohde"],
+  },
+  {
+    title: "Luovutusmuistio asiakkaalle",
+    category: "Dokumentit",
+    audience: "Asiakas / Huolto",
+    detail: "Yhteenveto siitä, millä asetuksilla kohde luovutettiin ja mitä jäi seurattavaksi ensimmäisten viikkojen aikana.",
+    tags: ["asiakas", "luovutus", "muistio"],
   },
 ];
 
@@ -183,8 +236,10 @@ const handoverText = document.querySelector("#handoverText");
 const heroProgress = document.querySelector("#heroProgress");
 const heroCritical = document.querySelector("#heroCritical");
 const heroSupport = document.querySelector("#heroSupport");
+const docFields = document.querySelector("#docFields");
+const chemList = document.querySelector("#chemList");
+const scenarioNav = document.querySelector("#scenarioNav");
 
-const scenarioList = document.querySelector("#scenarioList");
 const scenarioTitle = document.querySelector("#scenarioTitle");
 const scenarioIntro = document.querySelector("#scenarioIntro");
 const scenarioSteps = document.querySelector("#scenarioSteps");
@@ -192,6 +247,8 @@ const scenarioEscalation = document.querySelector("#scenarioEscalation");
 const scenarioResult = document.querySelector("#scenarioResult");
 const scenarioOutcome = document.querySelector("#scenarioOutcome");
 const scenarioTime = document.querySelector("#scenarioTime");
+const learningTitle = document.querySelector("#learningTitle");
+const learningText = document.querySelector("#learningText");
 
 const docSearch = document.querySelector("#docSearch");
 const docFilters = document.querySelector("#docFilters");
@@ -217,7 +274,7 @@ function renderChecklist() {
     card.className = `task-card${item.critical ? " is-critical" : ""}`;
 
     const tagClass = item.done ? "tag-ok" : item.critical ? "tag-critical" : "tag-standard";
-    const tagText = item.done ? "Valmis" : item.critical ? "Kriittinen" : "Avoin";
+    const tagText = item.done ? "Valmis" : item.critical ? "Täydennä" : "Avoin";
 
     card.innerHTML = `
       <input type="checkbox" ${item.done ? "checked" : ""} data-task-id="${item.id}" />
@@ -229,6 +286,50 @@ function renderChecklist() {
     `;
 
     checklistRoot.appendChild(card);
+  });
+}
+
+function renderDocumentationFields() {
+  docFields.innerHTML = "";
+
+  documentationFields.forEach((field) => {
+    const card = document.createElement("article");
+    card.className = `field-card${field.warning ? " is-warning" : ""}`;
+    card.innerHTML = `
+      <span>${field.label}</span>
+      <strong>${field.value}</strong>
+    `;
+    docFields.appendChild(card);
+  });
+}
+
+function renderChemistryChannels() {
+  chemList.innerHTML = "";
+
+  chemistryChannels.forEach((channel) => {
+    const card = document.createElement("article");
+    card.className = `chem-card${channel.status === "Säädä" ? " is-warning" : ""}`;
+    card.innerHTML = `
+      <div class="chem-card-head">
+        <div>
+          <strong>${channel.name}</strong>
+          <span>${channel.product}</span>
+        </div>
+        <span class="chem-badge ${channel.status === "Säädä" ? "chem-badge-warning" : "chem-badge-ok"}">${channel.status}</span>
+      </div>
+      <div class="chem-metrics">
+        <div>
+          <span>Tavoite</span>
+          <strong>${channel.target}</strong>
+        </div>
+        <div>
+          <span>Mitattu</span>
+          <strong>${channel.measured}</strong>
+        </div>
+      </div>
+      <p>${channel.note}</p>
+    `;
+    chemList.appendChild(card);
   });
 }
 
@@ -248,48 +349,32 @@ function updateChecklistSummary() {
     launchState.textContent = "Valmis luovutukseen";
     launchState.className = "panel-badge panel-badge-accent";
     readinessPoints.innerHTML = `
-      <li>Kaikki kriittiset sähkö- ja turvallisuustarkastukset valmiina</li>
-      <li>Kemikaaliannostelu dokumentoitu tavoitearvoihin</li>
-      <li>Huolto ja asiakas voivat tukeutua samaan dokumenttipakettiin</li>
+      <li>Kaikki kriittiset käyttöönottovaiheet on mitattu ja dokumentoitu</li>
+      <li>Kemikaalikanavat vastaavat tavoitearvoja ja testipesu on hyväksytty</li>
+      <li>Huolto voi käyttää samaa tietopankkia ilman lisäselvityksiä</li>
     `;
     handoverText.textContent =
-      "Kohde on valmis luovutettavaksi. Kaikki kriittiset mittaukset on tehty, turvallisuustestit kirjattu ja huoltoa varten tarvittavat dokumentit tallennettu.";
+      "Kohde on valmis luovutettavaksi. Mittaukset, ohjelmistoversio, kemiasäädöt, kuvat ja luovutushuomiot on kirjattu samaan dokumenttipakettiin.";
   } else if (criticalOpen === 1) {
     launchState.textContent = "Melkein valmis";
     launchState.className = "panel-badge panel-badge-accent";
     readinessPoints.innerHTML = `
-      <li>Yksi kriittinen vaihe kesken: ${openCriticalTitles[0]}</li>
-      <li>Luovutus voidaan aikatauluttaa heti kun viimeinen mittaus on hyväksytty</li>
-      <li>Dokumenttipaketti on muuten valmis huollon käyttöön</li>
+      <li>Yksi kriittinen kohta vielä auki: ${openCriticalTitles[0]}</li>
+      <li>Luovutus voidaan tehdä heti, kun viimeinen mittaus on vahvistettu</li>
+      <li>Huollon kannalta olennaiset tiedot ovat muuten valmiina</li>
     `;
     handoverText.textContent =
-      "Kohde on lähes valmis. Yksi kriittinen tarkastus odottaa hyväksyntää, minkä jälkeen luovutus voidaan tehdä ilman erillistä lisäkierrosta.";
+      "Kohde on lähes valmis luovutukseen. Viimeinen avoin kriittinen kohta kannattaa sulkea heti, jotta lopullinen tila jää oikein talteen.";
   } else {
-    launchState.textContent = "Osittain valmis";
+    launchState.textContent = "Täydennettävä ennen luovutusta";
     launchState.className = "panel-badge panel-badge-neutral";
     readinessPoints.innerHTML = openCriticalTitles
       .slice(0, 3)
-      .map((title) => `<li>Avoin kriittinen vaihe: ${title}</li>`)
+      .map((title) => `<li>Avoin kriittinen kohta: ${title}</li>`)
       .join("");
     handoverText.textContent =
-      "Kohteen käyttöönotto etenee suunnitellusti. Ennen luovutusta tulee vielä sulkea avoimet kriittiset vaiheet ja kirjata mittaustulokset dokumentaatioon.";
+      "Kohde on vielä täydennettävä ennen luovutusta. Erityisesti pesukemian mittaus, testipesun hyväksyntä ja lopullinen dokumentointi on varmistettava.";
   }
-}
-
-function renderScenarios() {
-  scenarioList.innerHTML = "";
-
-  scenarios.forEach((scenario) => {
-    const button = document.createElement("button");
-    button.type = "button";
-    button.className = `scenario-button${scenario.id === activeScenarioId ? " is-active" : ""}`;
-    button.dataset.scenarioId = scenario.id;
-    button.innerHTML = `
-      <strong>${scenario.title}</strong>
-      <span>${scenario.subtitle}</span>
-    `;
-    scenarioList.appendChild(button);
-  });
 }
 
 function updateScenarioDetail() {
@@ -304,11 +389,26 @@ function updateScenarioDetail() {
   scenarioOutcome.textContent = scenario.outcome;
   scenarioTime.textContent = scenario.time;
   heroSupport.textContent = scenario.supportRatio;
+  learningTitle.textContent = scenario.learningTitle;
+  learningText.textContent = scenario.learningText;
 
   scenarioOutcome.className =
     scenario.outcome === "Ratkeaa huollossa"
       ? "panel-badge panel-badge-accent"
       : "panel-badge panel-badge-neutral";
+}
+
+function renderScenarioNav() {
+  scenarioNav.innerHTML = "";
+
+  scenarios.forEach((scenario) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = `micro-nav-button${scenario.id === activeScenarioId ? " is-active" : ""}`;
+    button.dataset.scenarioId = scenario.id;
+    button.textContent = scenario.title;
+    scenarioNav.appendChild(button);
+  });
 }
 
 function getCategories() {
@@ -346,8 +446,8 @@ function renderDocuments() {
   if (filtered.length === 0) {
     docList.innerHTML = `
       <div class="empty-state">
-        Hakuehdoilla ei löytynyt dokumentteja. Tämäkin on hyödyllinen havainto:
-        puuttuva ohje pitää lisätä, jotta tieto ei jää ihmisten muistin varaan.
+        Hakuehdoilla ei löytynyt ohjetta. Tässä kohtaa hyvä toimintamalli on lisätä
+        uusi mikro-ohje, jotta tieto ei jää vain yhden ihmisen muistiin.
       </div>
     `;
     return;
@@ -370,8 +470,10 @@ function renderDocuments() {
 }
 
 renderChecklist();
+renderDocumentationFields();
+renderChemistryChannels();
 updateChecklistSummary();
-renderScenarios();
+renderScenarioNav();
 updateScenarioDetail();
 renderDocFilters();
 renderDocuments();
@@ -384,18 +486,8 @@ checklistRoot.addEventListener("change", (event) => {
   if (!item) return;
 
   item.done = target.checked;
-  renderChecklist();
   updateChecklistSummary();
-});
-
-scenarioList.addEventListener("click", (event) => {
-  const target = event.target;
-  const button = target instanceof HTMLElement ? target.closest("[data-scenario-id]") : null;
-  if (!(button instanceof HTMLButtonElement)) return;
-
-  activeScenarioId = button.dataset.scenarioId;
-  renderScenarios();
-  updateScenarioDetail();
+  renderChecklist();
 });
 
 docFilters.addEventListener("click", (event) => {
@@ -410,4 +502,14 @@ docFilters.addEventListener("click", (event) => {
 
 docSearch.addEventListener("input", () => {
   renderDocuments();
+});
+
+scenarioNav.addEventListener("click", (event) => {
+  const target = event.target;
+  const button = target instanceof HTMLElement ? target.closest("[data-scenario-id]") : null;
+  if (!(button instanceof HTMLButtonElement)) return;
+
+  activeScenarioId = button.dataset.scenarioId;
+  renderScenarioNav();
+  updateScenarioDetail();
 });
