@@ -1,88 +1,121 @@
-const checklistItems = [
+const views = [
   {
-    id: "site",
-    title: "Kohdetiedot, laitemalli ja sarjanumero kirjattu",
-    description: "Perustiedot talteen samaan runkoon myöhempää huoltoa ja muutoksia varten.",
-    critical: true,
-    done: true,
+    id: "overview",
+    label: "Dokumentaatio",
+    detail: "Kohdetiedot, mittaukset ja luovutuksen tila",
+    title: "Käyttöönoton dokumentaatio",
   },
   {
-    id: "software",
-    title: "Ohjelmistoversio ja parametrimuutokset dokumentoitu",
-    description: "Asennettu versio, tehdyt muutokset ja käyttöönoton poikkeamat näkyvät jälkikäteen.",
-    critical: true,
-    done: true,
-  },
-  {
-    id: "electrical",
-    title: "Sähkömittaukset ja suojaukset tallennettu",
-    description: "Syöttö, suojaukset, maadoitus ja turvapiirit mitattu sekä kirjattu.",
-    critical: true,
-    done: true,
-  },
-  {
-    id: "channels",
-    title: "Kemikaalikanavat nimetty ja annostelupumput ilmattu",
-    description: "Esipesu, shampoo, vaha ja vannepesu tunnistettu ja ilma poistettu linjoista.",
-    critical: true,
-    done: true,
+    id: "commissioning",
+    label: "Laatupassi",
+    detail: "Checklist ennen luovutusta",
+    title: "Käyttöönoton laatupassi",
   },
   {
     id: "chemistry",
-    title: "Pesukemian annostelu mitattu ja säädetty",
-    description: "Jokaisesta kanavasta on tavoitearvo, mitattu arvo ja dokumentoitu lopputulos.",
-    critical: true,
-    done: false,
+    label: "Pesukemia",
+    detail: "Annostelu, mittaus ja säätö",
+    title: "Pesukemian mittaus ja säätö",
   },
   {
-    id: "washresult",
-    title: "Testipesu hyväksytty ja havainto kirjattu",
-    description: "Pesutulos arvioitu, poikkeamat kirjattu ja tarvittaessa tehty lisäsäätö.",
-    critical: true,
-    done: false,
-  },
-  {
-    id: "photos",
-    title: "Valokuvat, tyyppikilvet ja kohdekuvat tallennettu",
-    description: "Valokuvat tukevat myöhempää huoltoa ja varaosien tunnistamista.",
-    critical: false,
-    done: false,
-  },
-  {
-    id: "handover",
-    title: "Asiakkaan luovutus ja käyttöopastus tehty",
-    description: "Päivittäiset toimet, hälytykset ja huoltokäytännöt käyty läpi.",
-    critical: false,
-    done: true,
-  },
-  {
-    id: "remote",
-    title: "Etäyhteys ja tietopankkilinkit testattu",
-    description: "Huolto pääsee oikeaan aineistoon ilman erillistä tiedonmetsästystä.",
-    critical: true,
-    done: true,
+    id: "knowledge",
+    label: "Tietopankki",
+    detail: "Huollon oppiva mikro-ohje",
+    title: "Huollon oppiva tietopankki",
   },
 ];
 
+const metrics = [
+  { label: "Dokumentoitu", value: "67%" },
+  { label: "Avoimet", value: "3" },
+  { label: "Kemialinjat OK", value: "3/4" },
+];
+
 const documentationFields = [
-  { label: "Kohde", value: "SmartCare Mock 01 / ABC Pesula", warning: false },
-  { label: "Laitemalli", value: "SmartCare mock / sarjanumero SC-240601", warning: false },
-  { label: "Ohjelmistoversio", value: "Wash control 4.8.2", warning: false },
-  { label: "Sähkömittaukset", value: "OK, tallennettu pöytäkirjaan", warning: false },
+  { label: "Kohde", value: "ABC Pesula / SmartCare Mock 01", warning: false },
+  { label: "Laitemalli ja sarjanumero", value: "SmartCare / SC-240601", warning: false },
+  { label: "Ohjelmistoversio", value: "Wash Control 4.8.2", warning: false },
+  { label: "Sähkömittaukset", value: "Tallennettu pöytäkirjaan", warning: false },
   { label: "Parametrimuutokset", value: "Kuivaus +8 %, vahaohjelma päivitetty", warning: false },
-  { label: "Pesukemian mittaus", value: "Vahakanava poikkeaa tavoitearvosta", warning: true },
+  { label: "Pesukemian annostelu", value: "Vahakanava vaatii säädön", warning: true },
   { label: "Valokuvat", value: "Kohdekuvat puuttuvat vielä", warning: true },
   { label: "Luovutustila", value: "Täydennettävä ennen luovutusta", warning: true },
 ];
 
-const chemistryChannels = [
+const checklistItems = [
+  {
+    id: "site",
+    title: "Kohdetiedot ja sarjanumerot kirjattu",
+    description: "Laitemalli, sarjanumero ja kohdetiedot talteen myöhempää huoltoa varten.",
+    done: true,
+    critical: true,
+  },
+  {
+    id: "software",
+    title: "Ohjelmistoversio ja parametrimuutokset dokumentoitu",
+    description: "Asennettu versio sekä tehdyt säätömuutokset näkyvät jälkikäteen.",
+    done: true,
+    critical: true,
+  },
+  {
+    id: "electrical",
+    title: "Sähkömittaukset tallennettu",
+    description: "Syöttö, suojaukset, maadoitus ja turvapiirit kirjattu.",
+    done: true,
+    critical: true,
+  },
+  {
+    id: "channels",
+    title: "Kemikaalikanavat nimetty ja ilmattu",
+    description: "Esipesu, shampoo, vaha ja vannepesu varmistettu käyttöönotossa.",
+    done: true,
+    critical: true,
+  },
+  {
+    id: "chemistry",
+    title: "Annostelu mitattu ja säädetty",
+    description: "Jokaisesta kanavasta on tavoitearvo, mitattu arvo ja kirjattu havainto.",
+    done: false,
+    critical: true,
+  },
+  {
+    id: "wash",
+    title: "Testipesu hyväksytty",
+    description: "Pesutulos arvioitu ja poikkeamat kirjattu dokumentaatioon.",
+    done: false,
+    critical: true,
+  },
+  {
+    id: "photos",
+    title: "Kohdekuvat ja tyyppikilvet tallennettu",
+    description: "Valokuvat helpottavat huoltoa ja varaosien tunnistusta.",
+    done: false,
+    critical: false,
+  },
+  {
+    id: "handover",
+    title: "Asiakkaan käyttöopastus tehty",
+    description: "Päivittäiset toimet ja huoltokäytännöt käyty läpi.",
+    done: true,
+    critical: false,
+  },
+  {
+    id: "remote",
+    title: "Etäyhteys ja tietopankkilinkit testattu",
+    description: "Huolto pääsee oikeaan aineistoon ilman erillistä tiedonhakua.",
+    done: true,
+    critical: true,
+  },
+];
+
+const chemicalChannels = [
   {
     name: "Esipesu",
     product: "Prewash Active",
     target: "24 ml/min",
     measured: "23 ml/min",
     status: "OK",
-    note: "Pieni poikkeama, ei vaadi säätöä.",
+    note: "Poikkeama pieni, ei vaadi säätöä.",
   },
   {
     name: "Shampoo",
@@ -90,7 +123,7 @@ const chemistryChannels = [
     target: "32 ml/min",
     measured: "31 ml/min",
     status: "OK",
-    note: "Pesuvaahdon määrä vastaa tavoitetta.",
+    note: "Vaahtotaso vastaa tavoitetta.",
   },
   {
     name: "Vaha",
@@ -113,72 +146,63 @@ const chemistryChannels = [
 const scenarios = [
   {
     id: "wax",
-    title: "Pesutulos heikko vahauksen jälkeen",
-    subtitle: "Kuivauspisaroita ja heikko kiilto testipesussa",
+    title: "Heikko kuivaus / kiilto",
     intro:
-      "Kuivauspisarat jäävät pintaan ja kiilto on heikko. Ennen komponenttien vaihtoa tarkistetaan vaha-kanavan todellinen tuotto.",
+      "Kuivauspisarat jäävät pintaan ja kiilto on heikko. Vaha-kanavan todellinen tuotto mitataan ennen komponenttien vaihtoa.",
     steps: [
       "Mittaa vaha-kanavan todellinen tuotto 30 sekunnin testijaksolla.",
       "Ilmaa letku ja tarkista mahdollinen ilmavuoto tai tukos.",
-      "Säädä annosteluasetus tavoitearvoon ja aja uusi testipesu.",
-      "Kirjaa uusi arvo ja havainto tietopankkiin luovutuksen liitteeksi.",
+      "Säädä annostelu tavoitearvoon ja tee uusi testipesu.",
+      "Kirjaa uusi arvo ja havainto käyttöönoton dokumentaatioon.",
     ],
     escalation:
-      "kanava on ilmattu, annostelu säädetty tavoitearvoon ja testipesun jälkeen pesutulos on edelleen heikko.",
+      "kanava on ilmattu, annostelu säädetty ja testipesun jälkeen pesutulos on edelleen heikko.",
     result:
-      "Useimmat tapaukset ratkeavat mittaamalla todellinen tuotto, säätämällä arvo kohdalleen ja kirjaamalla uusi asetus dokumentaatioon.",
-    outcome: "Säädä ja dokumentoi",
+      "Useimmat tapaukset ratkeavat mittaamalla todellinen tuotto, säätämällä arvo kohdalleen ja dokumentoimalla lopputulos.",
+    outcome: "Säädä",
     time: "Arvioitu käsittely: 15 min",
-    supportRatio: "3/4",
-    learningTitle: "Heikko kuivaus / kiilto",
-    learningText:
-      "Mittaa vaha-kanavan todellinen tuotto ennen komponenttien vaihtoa. Tarkista myös ilma letkussa, säädä annostelu ja kirjaa uusi arvo dokumentaatioon.",
+    learning:
+      "Heikko kuivaus/kiilto: mittaa vaha-kanavan todellinen tuotto ennen komponenttien vaihtoa.",
   },
   {
     id: "prewash",
-    title: "Esipesu ei irrota likaa riittävästi",
-    subtitle: "Pesutulos jää harmaaksi jo esipesuvaiheessa",
+    title: "Esipesu jää tehottomaksi",
     intro:
-      "Pesutulos viittaa usein annosteluun, suuttimen kuntoon tai väärään ohjelma-arvoon, ei välttämättä sähkövikaan.",
+      "Pesutulos jää harmaaksi jo esipesuvaiheessa. Tarkista annostelu ja ohjelma-aika ennen muuta vianhakua.",
     steps: [
-      "Varmista esipesuaineen kanava, letkut ja suuttimen puhtaus.",
-      "Mittaa esipesun todellinen tuotto ja vertaa tavoitearvoon.",
-      "Tarkista ohjelmasta oikea esipesuaika ja annostelupiste.",
-      "Kirjaa lopullinen arvo ja tee vertailutestipesu.",
+      "Varmista esipesukanava, letkut ja suuttimen puhtaus.",
+      "Mittaa todellinen tuotto ja vertaa tavoitearvoon.",
+      "Tarkista oikea esipesuaika ohjelmasta.",
+      "Kirjaa korjattu arvo ja tee vertailutestipesu.",
     ],
     escalation:
-      "suutin, letkut ja annostelu ovat kunnossa mutta pesutulos jää silti poikkeavaksi useassa testipesussa.",
+      "suutin, letkut ja annostelu ovat kunnossa mutta pesutulos jää silti poikkeavaksi useassa testissä.",
     result:
-      "Yleisin juurisyy löytyy annostelusta tai ohjelma-ajasta, jolloin tapaus ratkeaa huollossa ilman lisäeskalointia.",
-    outcome: "Ratkeaa huollossa",
+      "Yleisin juurisyy löytyy annostelusta tai ohjelma-ajasta, joten huolto pystyy ratkaisemaan asian useimmiten itse.",
+    outcome: "OK",
     time: "Arvioitu käsittely: 14 min",
-    supportRatio: "4/4",
-    learningTitle: "Esipesu jää tehottomaksi",
-    learningText:
-      "Tarkista esipesusuutin ja mittaa tuotto ennen kuin epäilet kemikaalia tai ohjelmistovirhettä. Vertailupesun havainto kannattaa kirjata samaan käyttöönottorunkoon.",
+    learning:
+      "Esipesu jää tehottomaksi: tarkista suutin ja mittaa tuotto ennen kuin epäilet sähkö- tai ohjelmistovikaa.",
   },
   {
     id: "foam",
     title: "Shampoon vaahto jää ohueksi",
-    subtitle: "Asiakas kokee pesun näyttävän vajaalta",
     intro:
-      "Vaahto-ongelma voi olla annostelun lisäksi näyttölaatuun vaikuttava asiakaskokemusasia, joten dokumentointi on tärkeää myös myynnille.",
+      "Pesu näyttää asiakkaan silmään vajaalta. Varmista annostelu, säiliötila ja visuaalinen testipesu.",
     steps: [
       "Tarkista shampoo-kanavan tuotto ja ilmansekoitus.",
-      "Varmista ettei kemikaalisäiliö ole lähes tyhjä tai syöttöletku vuoda.",
-      "Aja visuaalinen testipesu ja vertaile vaahtokerrosta tavoitetasoon.",
-      "Kirjaa muutos, jotta myöhemmin nähdään millä arvolla hyväksytty tulos saavutettiin.",
+      "Varmista ettei säiliö ole tyhjä tai letku vuoda.",
+      "Tee visuaalinen testipesu ja vertaa vaahtotasoa tavoitetasoon.",
+      "Kirjaa hyväksytty lopputulos dokumentaatioon.",
     ],
     escalation:
       "tuotto on oikea mutta vaahtokuva jää silti poikkeavaksi ja vaikuttaa pesutulokseen tai asiakaskokemukseen.",
     result:
-      "Dokumentoitu vertailutulos auttaa erottamaan oikean laatuongelman normaalista vaihtelusta.",
-    outcome: "Ratkeaa huollossa",
+      "Dokumentoitu visuaalinen havainto auttaa seuraavaa huoltajaa ymmärtämään millä säädöllä hyväksytty tulos saavutettiin.",
+    outcome: "OK",
     time: "Arvioitu käsittely: 12 min",
-    supportRatio: "4/4",
-    learningTitle: "Vaahto näyttää heikolta",
-    learningText:
-      "Kirjaa myös visuaalinen havainto, ei vain ml/min-arvo. Näin seuraava huoltaja näkee, millä säädöllä hyväksytty vaahtotaso saavutettiin.",
+    learning:
+      "Ohut vaahto: kirjaa myös visuaalinen havainto, ei vain ml/min-arvo.",
   },
 ];
 
@@ -186,60 +210,48 @@ const documents = [
   {
     title: "Käyttöönoton dokumentointipohja",
     category: "Käyttöönotto",
-    audience: "Tuoteasiantuntija / Asennus",
-    detail: "Kohdetiedot, sarjanumerot, ohjelmistoversiot, mittaukset, parametrit, kuvat ja luovutushuomiot.",
-    tags: ["käyttöönotto", "dokumentaatio", "luovutus"],
+    description: "Kohdetiedot, sarjanumerot, ohjelmistoversiot, mittaukset, parametrit, kuvat ja luovutushuomiot.",
   },
   {
     title: "Pesukemian mittaus- ja säätöohje",
     category: "Kemia",
-    audience: "Huolto",
-    detail: "Tavoitearvot, mittausjakso, ilmauksen tarkastus ja dokumentoitavat havainnot kaikille kanaville.",
-    tags: ["kemia", "annostelu", "mittaus"],
+    description: "Tavoitearvot, mittausjakso, ilmauksen tarkastus ja dokumentoitavat havainnot kaikille kanaville.",
   },
   {
-    title: "Vaha-kanavan poikkeama: mikro-ohje huollolle",
+    title: "Vaha-kanavan mikro-ohje",
     category: "Mikro-ohje",
-    audience: "Huolto",
-    detail: "Mittaa todellinen tuotto ennen komponenttien vaihtoa. Ilmaa, säädä, testaa ja kirjaa uusi arvo.",
-    tags: ["vaha", "kiilto", "kuivaus"],
+    description: "Mittaa todellinen tuotto ennen komponenttien vaihtoa. Ilmaa, säädä, testaa ja kirjaa uusi arvo.",
   },
   {
-    title: "Päämiehen kemikaalikanavien asetustaulukko",
+    title: "Päämiehen asetustaulukko",
     category: "Päämies",
-    audience: "Tuoteasiantuntija",
-    detail: "Valmistajan ohjearvot kemikaalikanaville, ohjelma-asetuksille ja testipesulle.",
-    tags: ["päämies", "asetus", "washtec"],
-  },
-  {
-    title: "Kohdekuvat ja tyyppikilvet",
-    category: "Dokumentit",
-    audience: "Huolto / Varaosat",
-    detail: "Valokuvat helpottavat myöhempää huoltoa, varaosien tunnistusta ja muutosten jäljitystä.",
-    tags: ["kuvat", "tyyppikilpi", "kohde"],
+    description: "Kemikaalikanavien ohjearvot, ohjelma-asetukset ja hyväksytyn testipesun rajat.",
   },
   {
     title: "Luovutusmuistio asiakkaalle",
     category: "Dokumentit",
-    audience: "Asiakas / Huolto",
-    detail: "Yhteenveto siitä, millä asetuksilla kohde luovutettiin ja mitä jäi seurattavaksi ensimmäisten viikkojen aikana.",
-    tags: ["asiakas", "luovutus", "muistio"],
+    description: "Yhteenveto siitä, millä asetuksilla kohde luovutettiin ja mitä jäi seurattavaksi.",
   },
 ];
 
-const checklistRoot = document.querySelector("#checklist");
+const navButtons = document.querySelector("#navButtons");
+const topMetrics = document.querySelector("#topMetrics");
+const viewTitle = document.querySelector("#viewTitle");
+const viewPanels = document.querySelectorAll(".view");
+
+const overviewFields = document.querySelector("#overviewFields");
+const checklist = document.querySelector("#checklist");
 const checklistCounter = document.querySelector("#checklistCounter");
-const launchState = document.querySelector("#launchState");
-const progressValue = document.querySelector("#progressValue");
-const readinessPoints = document.querySelector("#readinessPoints");
+const handoverBadge = document.querySelector("#handoverBadge");
 const handoverText = document.querySelector("#handoverText");
-const heroProgress = document.querySelector("#heroProgress");
+const progressValue = document.querySelector("#progressValue");
 const heroCritical = document.querySelector("#heroCritical");
-const heroSupport = document.querySelector("#heroSupport");
-const docFields = document.querySelector("#docFields");
+const overviewProgress = document.querySelector("#overviewProgress");
+const overviewOpen = document.querySelector("#overviewOpen");
+const docStatusBadge = document.querySelector("#docStatusBadge");
+
 const chemList = document.querySelector("#chemList");
 const scenarioNav = document.querySelector("#scenarioNav");
-
 const scenarioTitle = document.querySelector("#scenarioTitle");
 const scenarioIntro = document.querySelector("#scenarioIntro");
 const scenarioSteps = document.querySelector("#scenarioSteps");
@@ -247,85 +259,127 @@ const scenarioEscalation = document.querySelector("#scenarioEscalation");
 const scenarioResult = document.querySelector("#scenarioResult");
 const scenarioOutcome = document.querySelector("#scenarioOutcome");
 const scenarioTime = document.querySelector("#scenarioTime");
-const learningTitle = document.querySelector("#learningTitle");
 const learningText = document.querySelector("#learningText");
 
 const docSearch = document.querySelector("#docSearch");
 const docFilters = document.querySelector("#docFilters");
 const docList = document.querySelector("#docList");
 
-let activeScenarioId = scenarios[0].id;
+let activeView = "overview";
+let activeScenario = scenarios[0].id;
 let activeCategory = "Kaikki";
 
-function getChecklistStats() {
+function checklistStats() {
   const total = checklistItems.length;
   const done = checklistItems.filter((item) => item.done).length;
-  const criticalOpen = checklistItems.filter((item) => item.critical && !item.done).length;
-  const percent = Math.round((done / total) * 100);
+  const openCritical = checklistItems.filter((item) => item.critical && !item.done).length;
+  return {
+    total,
+    done,
+    percent: Math.round((done / total) * 100),
+    openCritical,
+  };
+}
 
-  return { total, done, criticalOpen, percent };
+function renderNav() {
+  navButtons.innerHTML = "";
+  views.forEach((view) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = `nav-button${view.id === activeView ? " is-active" : ""}`;
+    button.dataset.view = view.id;
+    button.innerHTML = `<strong>${view.label}</strong><span>${view.detail}</span>`;
+    navButtons.appendChild(button);
+  });
+}
+
+function renderTopMetrics() {
+  topMetrics.innerHTML = "";
+  metrics.forEach((metric) => {
+    const tile = document.createElement("div");
+    tile.className = "metric-tile";
+    tile.innerHTML = `<span>${metric.label}</span><strong>${metric.value}</strong>`;
+    topMetrics.appendChild(tile);
+  });
+}
+
+function activateView() {
+  const active = views.find((view) => view.id === activeView);
+  if (active) {
+    viewTitle.textContent = active.title;
+  }
+
+  viewPanels.forEach((panel) => {
+    panel.classList.toggle("is-active", panel.dataset.view === activeView);
+  });
+}
+
+function renderOverviewFields() {
+  overviewFields.innerHTML = "";
+  documentationFields.forEach((field) => {
+    const item = document.createElement("article");
+    item.className = `field-card${field.warning ? " warning" : ""}`;
+    item.innerHTML = `<span>${field.label}</span><strong>${field.value}</strong>`;
+    overviewFields.appendChild(item);
+  });
 }
 
 function renderChecklist() {
-  checklistRoot.innerHTML = "";
-
+  checklist.innerHTML = "";
   checklistItems.forEach((item) => {
     const card = document.createElement("label");
-    card.className = `task-card${item.critical ? " is-critical" : ""}`;
-
-    const tagClass = item.done ? "tag-ok" : item.critical ? "tag-critical" : "tag-standard";
-    const tagText = item.done ? "Valmis" : item.critical ? "Täydennä" : "Avoin";
-
+    card.className = "check-card";
+    const statusClass = item.done ? "status-ok" : "status-warn";
+    const statusText = item.done ? "Valmis" : item.critical ? "Kesken" : "Huomio";
     card.innerHTML = `
       <input type="checkbox" ${item.done ? "checked" : ""} data-task-id="${item.id}" />
-      <div class="task-copy">
+      <div>
         <strong>${item.title}</strong>
         <p>${item.description}</p>
       </div>
-      <span class="panel-badge task-tag ${tagClass}">${tagText}</span>
+      <span class="badge status-chip ${statusClass}">${statusText}</span>
     `;
-
-    checklistRoot.appendChild(card);
+    checklist.appendChild(card);
   });
 }
 
-function renderDocumentationFields() {
-  docFields.innerHTML = "";
+function updateChecklistSummary() {
+  const stats = checklistStats();
+  checklistCounter.textContent = `${stats.done} / ${stats.total} valmiina`;
+  progressValue.textContent = `${stats.percent}%`;
+  heroCritical.textContent = `${stats.openCritical}`;
+  overviewProgress.textContent = `${stats.percent}%`;
+  overviewOpen.textContent = `${stats.total - stats.done}`;
 
-  documentationFields.forEach((field) => {
-    const card = document.createElement("article");
-    card.className = `field-card${field.warning ? " is-warning" : ""}`;
-    card.innerHTML = `
-      <span>${field.label}</span>
-      <strong>${field.value}</strong>
-    `;
-    docFields.appendChild(card);
-  });
+  if (stats.openCritical === 0) {
+    handoverBadge.textContent = "Valmis luovutukseen";
+    docStatusBadge.textContent = "Valmis";
+    handoverText.textContent =
+      "Kaikki kriittiset mittaukset, kemiasäädöt, kuvat ja luovutushuomiot on tallennettu. Kohde voidaan luovuttaa.";
+  } else {
+    handoverBadge.textContent = "Täydennettävä ennen luovutusta";
+    docStatusBadge.textContent = "Täydennettävä";
+    handoverText.textContent =
+      "Ennen luovutusta tulee vahvistaa pesukemian mittaustulos, tallentaa lopulliset annosteluarvot ja täydentää kohdekuvat tietopankkiin.";
+  }
 }
 
-function renderChemistryChannels() {
+function renderChemistry() {
   chemList.innerHTML = "";
-
-  chemistryChannels.forEach((channel) => {
+  chemicalChannels.forEach((channel) => {
     const card = document.createElement("article");
-    card.className = `chem-card${channel.status === "Säädä" ? " is-warning" : ""}`;
+    card.className = `chem-card${channel.status === "Säädä" ? " warning" : ""}`;
     card.innerHTML = `
       <div class="chem-card-head">
         <div>
           <strong>${channel.name}</strong>
           <span>${channel.product}</span>
         </div>
-        <span class="chem-badge ${channel.status === "Säädä" ? "chem-badge-warning" : "chem-badge-ok"}">${channel.status}</span>
+        <span class="badge ${channel.status === "Säädä" ? "badge-accent" : "status-ok"}">${channel.status}</span>
       </div>
       <div class="chem-metrics">
-        <div>
-          <span>Tavoite</span>
-          <strong>${channel.target}</strong>
-        </div>
-        <div>
-          <span>Mitattu</span>
-          <strong>${channel.measured}</strong>
-        </div>
+        <div><span>Tavoite</span><strong>${channel.target}</strong></div>
+        <div><span>Mitattu</span><strong>${channel.measured}</strong></div>
       </div>
       <p>${channel.note}</p>
     `;
@@ -333,52 +387,20 @@ function renderChemistryChannels() {
   });
 }
 
-function updateChecklistSummary() {
-  const { total, done, criticalOpen, percent } = getChecklistStats();
-  checklistCounter.textContent = `${done} / ${total} valmiina`;
-  progressValue.textContent = `${percent}%`;
-  heroProgress.textContent = `${percent}%`;
-  heroCritical.textContent = `${criticalOpen}`;
-  document.documentElement.style.setProperty("--progress-angle", `${percent * 3.6}deg`);
-
-  const openCriticalTitles = checklistItems
-    .filter((item) => item.critical && !item.done)
-    .map((item) => item.title);
-
-  if (criticalOpen === 0) {
-    launchState.textContent = "Valmis luovutukseen";
-    launchState.className = "panel-badge panel-badge-accent";
-    readinessPoints.innerHTML = `
-      <li>Kaikki kriittiset käyttöönottovaiheet on mitattu ja dokumentoitu</li>
-      <li>Kemikaalikanavat vastaavat tavoitearvoja ja testipesu on hyväksytty</li>
-      <li>Huolto voi käyttää samaa tietopankkia ilman lisäselvityksiä</li>
-    `;
-    handoverText.textContent =
-      "Kohde on valmis luovutettavaksi. Mittaukset, ohjelmistoversio, kemiasäädöt, kuvat ja luovutushuomiot on kirjattu samaan dokumenttipakettiin.";
-  } else if (criticalOpen === 1) {
-    launchState.textContent = "Melkein valmis";
-    launchState.className = "panel-badge panel-badge-accent";
-    readinessPoints.innerHTML = `
-      <li>Yksi kriittinen kohta vielä auki: ${openCriticalTitles[0]}</li>
-      <li>Luovutus voidaan tehdä heti, kun viimeinen mittaus on vahvistettu</li>
-      <li>Huollon kannalta olennaiset tiedot ovat muuten valmiina</li>
-    `;
-    handoverText.textContent =
-      "Kohde on lähes valmis luovutukseen. Viimeinen avoin kriittinen kohta kannattaa sulkea heti, jotta lopullinen tila jää oikein talteen.";
-  } else {
-    launchState.textContent = "Täydennettävä ennen luovutusta";
-    launchState.className = "panel-badge panel-badge-neutral";
-    readinessPoints.innerHTML = openCriticalTitles
-      .slice(0, 3)
-      .map((title) => `<li>Avoin kriittinen kohta: ${title}</li>`)
-      .join("");
-    handoverText.textContent =
-      "Kohde on vielä täydennettävä ennen luovutusta. Erityisesti pesukemian mittaus, testipesun hyväksyntä ja lopullinen dokumentointi on varmistettava.";
-  }
+function renderScenarioNav() {
+  scenarioNav.innerHTML = "";
+  scenarios.forEach((scenario) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = `scenario-button${scenario.id === activeScenario ? " is-active" : ""}`;
+    button.dataset.scenario = scenario.id;
+    button.textContent = scenario.title;
+    scenarioNav.appendChild(button);
+  });
 }
 
-function updateScenarioDetail() {
-  const scenario = scenarios.find((item) => item.id === activeScenarioId);
+function updateScenario() {
+  const scenario = scenarios.find((item) => item.id === activeScenario);
   if (!scenario) return;
 
   scenarioTitle.textContent = scenario.title;
@@ -388,68 +410,38 @@ function updateScenarioDetail() {
   scenarioResult.textContent = scenario.result;
   scenarioOutcome.textContent = scenario.outcome;
   scenarioTime.textContent = scenario.time;
-  heroSupport.textContent = scenario.supportRatio;
-  learningTitle.textContent = scenario.learningTitle;
-  learningText.textContent = scenario.learningText;
-
-  scenarioOutcome.className =
-    scenario.outcome === "Ratkeaa huollossa"
-      ? "panel-badge panel-badge-accent"
-      : "panel-badge panel-badge-neutral";
+  learningText.textContent = scenario.learning;
 }
 
-function renderScenarioNav() {
-  scenarioNav.innerHTML = "";
-
-  scenarios.forEach((scenario) => {
-    const button = document.createElement("button");
-    button.type = "button";
-    button.className = `micro-nav-button${scenario.id === activeScenarioId ? " is-active" : ""}`;
-    button.dataset.scenarioId = scenario.id;
-    button.textContent = scenario.title;
-    scenarioNav.appendChild(button);
-  });
-}
-
-function getCategories() {
+function categories() {
   return ["Kaikki", ...new Set(documents.map((doc) => doc.category))];
 }
 
 function renderDocFilters() {
   docFilters.innerHTML = "";
-
-  getCategories().forEach((category) => {
+  categories().forEach((category) => {
     const button = document.createElement("button");
     button.type = "button";
-    button.className = `doc-filter${category === activeCategory ? " is-active" : ""}`;
-    button.textContent = category;
+    button.className = `filter-button${category === activeCategory ? " is-active" : ""}`;
     button.dataset.category = category;
+    button.textContent = category;
     docFilters.appendChild(button);
   });
 }
 
 function renderDocuments() {
-  const searchTerm = docSearch.value.trim().toLowerCase();
+  const term = docSearch.value.trim().toLowerCase();
   const filtered = documents.filter((doc) => {
     const categoryMatch = activeCategory === "Kaikki" || doc.category === activeCategory;
     const searchMatch =
-      !searchTerm ||
-      [doc.title, doc.category, doc.audience, doc.detail, ...doc.tags]
-        .join(" ")
-        .toLowerCase()
-        .includes(searchTerm);
+      !term || `${doc.title} ${doc.category} ${doc.description}`.toLowerCase().includes(term);
     return categoryMatch && searchMatch;
   });
 
   docList.innerHTML = "";
 
-  if (filtered.length === 0) {
-    docList.innerHTML = `
-      <div class="empty-state">
-        Hakuehdoilla ei löytynyt ohjetta. Tässä kohtaa hyvä toimintamalli on lisätä
-        uusi mikro-ohje, jotta tieto ei jää vain yhden ihmisen muistiin.
-      </div>
-    `;
+  if (!filtered.length) {
+    docList.innerHTML = `<div class="note-block">Hakuehdolla ei löytynyt ohjetta. Tässä kohdassa olisi hyvä lisätä uusi mikro-ohje tietopankkiin.</div>`;
     return;
   }
 
@@ -458,43 +450,57 @@ function renderDocuments() {
     card.className = "doc-card";
     card.innerHTML = `
       <strong>${doc.title}</strong>
-      <span>${doc.detail}</span>
-      <div class="doc-meta">
-        <span>${doc.category}</span>
-        <span>${doc.audience}</span>
-        ${doc.tags.map((tag) => `<span>#${tag}</span>`).join("")}
-      </div>
+      <p>${doc.description}</p>
+      <span class="badge">${doc.category}</span>
     `;
     docList.appendChild(card);
   });
 }
 
+renderNav();
+renderTopMetrics();
+activateView();
+renderOverviewFields();
 renderChecklist();
-renderDocumentationFields();
-renderChemistryChannels();
 updateChecklistSummary();
+renderChemistry();
 renderScenarioNav();
-updateScenarioDetail();
+updateScenario();
 renderDocFilters();
 renderDocuments();
 
-checklistRoot.addEventListener("change", (event) => {
+navButtons.addEventListener("click", (event) => {
+  const target = event.target;
+  const button = target instanceof HTMLElement ? target.closest("[data-view]") : null;
+  if (!(button instanceof HTMLButtonElement)) return;
+  activeView = button.dataset.view;
+  renderNav();
+  activateView();
+});
+
+checklist.addEventListener("change", (event) => {
   const target = event.target;
   if (!(target instanceof HTMLInputElement)) return;
-
   const item = checklistItems.find((entry) => entry.id === target.dataset.taskId);
   if (!item) return;
-
   item.done = target.checked;
-  updateChecklistSummary();
   renderChecklist();
+  updateChecklistSummary();
+});
+
+scenarioNav.addEventListener("click", (event) => {
+  const target = event.target;
+  const button = target instanceof HTMLElement ? target.closest("[data-scenario]") : null;
+  if (!(button instanceof HTMLButtonElement)) return;
+  activeScenario = button.dataset.scenario;
+  renderScenarioNav();
+  updateScenario();
 });
 
 docFilters.addEventListener("click", (event) => {
   const target = event.target;
   const button = target instanceof HTMLElement ? target.closest("[data-category]") : null;
   if (!(button instanceof HTMLButtonElement)) return;
-
   activeCategory = button.dataset.category;
   renderDocFilters();
   renderDocuments();
@@ -502,14 +508,4 @@ docFilters.addEventListener("click", (event) => {
 
 docSearch.addEventListener("input", () => {
   renderDocuments();
-});
-
-scenarioNav.addEventListener("click", (event) => {
-  const target = event.target;
-  const button = target instanceof HTMLElement ? target.closest("[data-scenario-id]") : null;
-  if (!(button instanceof HTMLButtonElement)) return;
-
-  activeScenarioId = button.dataset.scenarioId;
-  renderScenarioNav();
-  updateScenarioDetail();
 });

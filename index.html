@@ -3,281 +3,214 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>HuoltoAssist | Käyttöönotto, kemia ja tietopankki</title>
+    <title>HuoltoAssist | Käyttöönotto + Kemia + Tietopankki</title>
     <meta
       name="description"
-      content="Konseptidemo käyttöönoton dokumentaatiosta, pesukemian mittauksesta ja huollon oppivasta tietopankista."
+      content="Konseptidemo käyttöönoton dokumentaatiosta, pesukemian mittauksesta, säädöstä ja huollon oppivasta tietopankista."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./demo.css" />
   </head>
   <body>
-    <div class="page-shell">
-      <nav class="top-nav" aria-label="Päänavigaatio">
-        <a class="brand-chip" href="#top">HuoltoAssist</a>
-        <div class="top-nav-links">
-          <a href="#commissioning">Käyttöönotto</a>
-          <a href="#chemistry">Kemia</a>
-          <a href="#docs">Tietopankki</a>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand-block">
+          <div class="brand-mark">HA</div>
+          <div>
+            <p class="sidebar-label">Haastatteludemo</p>
+            <h1>HuoltoAssist</h1>
+            <p class="sidebar-copy">Käyttöönotto, pesukemia ja huollon oppiva tietopankki.</p>
+          </div>
         </div>
-      </nav>
 
-      <header class="hero" id="top">
-        <div class="hero-copy">
-          <p class="eyebrow">Haastatteludemo · dokumentaatio + kemia + oppiva huolto</p>
-          <h1>Käyttöönoton laatu ei synny muistista vaan mitatusta tiedosta</h1>
-          <p class="lead">
-            Tämä konsepti yhdistää käyttöönoton dokumentaation, pesukemian mittauksen ja
-            huollon oppivan tietopankin samaan näkymään. Tavoite on, että myöhemmin ei
-            tarvitse arvailla millä asetuksilla kohde luovutettiin, mitä mitattiin ja
-            oliko pesutulos hyväksytty.
+        <nav class="sidebar-nav" id="navButtons" aria-label="Näkymät"></nav>
+
+        <section class="sidebar-note">
+          <p class="sidebar-label">Miksi tämä tehtiin</p>
+          <p>
+            Tavoite ei ole tehdä AI-vikapankkia, vaan näyttää miten sähkö, dokumentaatio,
+            pesukemian mittaukset ja huollon oppi voidaan yhdistää samaan käyttöönottotyökaluun.
           </p>
-          <div class="hero-actions">
-            <a href="#commissioning" class="button button-primary">Avaa käyttöönotto</a>
-            <a href="#chemistry" class="button button-secondary">Katso kemiamittaus</a>
-          </div>
-          <div class="metric-row">
-            <article class="metric-card">
-              <span class="metric-label">Dokumentaatio</span>
-              <strong>8 ydinkenttää talteen</strong>
-              <p>Kohdetiedot, mittaukset, parametrit, kuvat, kemia ja luovutushuomiot samassa rungossa.</p>
-            </article>
-            <article class="metric-card">
-              <span class="metric-label">Pesukemia</span>
-              <strong>1 kanava vaatii säädön</strong>
-              <p>Pesutulosongelma ohjataan ensin annostelun mittaukseen ennen turhaa komponenttien vaihtoa.</p>
-            </article>
-            <article class="metric-card">
-              <span class="metric-label">Huollon oppi</span>
-              <strong>Uusi mikro-ohje syntyy</strong>
-              <p>Yksittäinen tapaus muuttuu yhteiseksi toimintamalliksi koko huollolle.</p>
-            </article>
-          </div>
-        </div>
+        </section>
+      </aside>
 
-        <aside class="hero-panel">
-          <div class="status-card">
-            <div class="status-topline">
-              <span class="status-pill status-live">Live-demo</span>
-              <span class="status-pill">Fiktiivinen esimerkkidata</span>
-            </div>
-            <h2>Esimerkkikohde: SmartCare Mock 01</h2>
-            <ul class="signal-list">
-              <li>
-                <span>Käyttöönoton valmius</span>
-                <strong id="heroProgress">67%</strong>
-              </li>
-              <li>
-                <span>Avoimet kriittiset kohdat</span>
-                <strong id="heroCritical">2</strong>
-              </li>
-              <li>
-                <span>Kemialinjoista kunnossa</span>
-                <strong id="heroSupport">3/4</strong>
-              </li>
-            </ul>
-            <p class="status-note">
-              Tuoteasiantuntijan arvo ei ole vain vian ratkaisu, vaan se että tieto jää
-              talteen myöhempää huoltoa, säätöä ja seuraavia käyttöönottoja varten.
-            </p>
+      <main class="workspace">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Fiktiivinen konseptidata</p>
+            <h2 id="viewTitle">Käyttöönoton dokumentaatio</h2>
           </div>
+          <div class="metric-strip" id="topMetrics"></div>
+        </header>
 
-          <div class="care-card">
-            <p class="eyebrow">Johtoa varten</p>
-            <h3>Liiketoimintahyöty näkyväksi</h3>
-            <p>
-              Kun käyttöönotosta jää talteen oikeat mittaukset ja kemiasäädöt, pesutulos
-              pysyy tasaisempana, huolto löytää juurisyyt nopeammin ja menetetty pesumyynti
-              vähenee.
-            </p>
-            <ul class="care-list">
-              <li>Vähemmän henkilöriippuvuutta kriittisessä käyttöönotto- ja huoltotiedossa.</li>
-              <li>Vähemmän turhia varaosavaihtoja, kun annostelu tarkistetaan ensin.</li>
-              <li>Jokainen vaikea tapaus voi tuottaa uuden ohjeen koko organisaatiolle.</li>
-            </ul>
-          </div>
-        </aside>
-      </header>
-
-      <main class="dashboard">
-        <section class="section" id="commissioning">
-          <div class="section-heading">
+        <section class="view is-active" id="view-overview" data-view="overview">
+          <div class="hero-card">
             <div>
-              <p class="eyebrow">1. Käyttöönotto</p>
-              <h2>Dokumentaatio osana käyttöönottotyötä</h2>
+              <p class="eyebrow">SmartCare Mock 01</p>
+              <h3>Käyttöönoton laatu syntyy siitä, mitä jää talteen</h3>
+              <p>
+                Kun kohdetiedot, sähkömittaukset, ohjelmistoversiot, parametrit, pesukemian
+                annostelut, valokuvat ja luovutushuomiot kirjataan samaan runkoon, myöhempi
+                huolto ei joudu arvailemaan lähtötilannetta.
+              </p>
             </div>
-            <p>
-              Demo näyttää, mitä kohteesta pitäisi jäädä talteen heti käyttöönotossa:
-              mittaukset, ohjelmistot, parametrit, pesukemia, valokuvat ja avoimet puutteet.
-            </p>
+            <div class="hero-side">
+              <div class="hero-state">
+                <span>Valmiusaste</span>
+                <strong id="overviewProgress">67%</strong>
+              </div>
+              <div class="hero-state">
+                <span>Avoimet kohdat</span>
+                <strong id="overviewOpen">3</strong>
+              </div>
+            </div>
           </div>
 
-          <div class="panel-grid panel-grid-wide">
-            <article class="panel checklist-panel">
-              <div class="panel-head">
+          <div class="grid-two">
+            <section class="card">
+              <div class="card-head">
+                <h3>Käyttöönotosta talteen jäävä ydin</h3>
+                <span class="badge" id="docStatusBadge">Täydennettävä</span>
+              </div>
+              <div class="field-grid" id="overviewFields"></div>
+            </section>
+
+            <section class="card">
+              <div class="card-head">
+                <h3>Johtoa varten</h3>
+                <span class="badge badge-accent">Liiketoimintahyöty</span>
+              </div>
+              <div class="info-stack">
+                <div class="info-block">
+                  <h4>Vähemmän menetettyä pesumyyntiä</h4>
+                  <p>Huolto näkee heti mitä on mitattu, mitä on säädetty ja mitä jäi avoimeksi.</p>
+                </div>
+                <div class="info-block">
+                  <h4>Vähemmän henkilöriippuvuutta</h4>
+                  <p>Käyttöönoton tieto ei jää yhden asiantuntijan muistiin tai puhelimeen.</p>
+                </div>
+                <div class="info-block">
+                  <h4>Parempi laatu seuraaviin kohteisiin</h4>
+                  <p>Vaikeasta tapauksesta syntyy mikro-ohje, jota koko huolto voi käyttää.</p>
+                </div>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <section class="view" id="view-commissioning" data-view="commissioning">
+          <div class="grid-two">
+            <section class="card">
+              <div class="card-head">
                 <h3>Käyttöönoton laatupassi</h3>
-                <span class="panel-badge" id="checklistCounter">6 / 9 valmiina</span>
+                <span class="badge" id="checklistCounter">6 / 9 valmiina</span>
               </div>
               <div class="checklist" id="checklist"></div>
-            </article>
+            </section>
 
-            <article class="panel summary-panel">
-              <div class="panel-head">
-                <h3>Dokumentaation tilanne</h3>
-                <span class="panel-badge panel-badge-neutral" id="launchState">Täydennettävä ennen luovutusta</span>
+            <section class="card">
+              <div class="card-head">
+                <h3>Luovutusvalmius</h3>
+                <span class="badge" id="handoverBadge">Täydennettävä ennen luovutusta</span>
               </div>
-
-              <div class="readiness-visual">
-                <div class="readiness-ring">
-                  <div class="readiness-ring-inner">
-                    <strong id="progressValue">67%</strong>
-                    <span>valmiina</span>
-                  </div>
-                </div>
-                <ul class="readiness-points" id="readinessPoints">
-                  <li>Sähkömittaukset ja ohjelmistoversio dokumentoitu</li>
-                  <li>Vahakanavan mittaustulos poikkeaa tavoitearvosta</li>
-                  <li>Luovutus voidaan tehdä, kun kemia ja valokuvat on kirjattu</li>
-                </ul>
+              <div class="big-values">
+                <article class="big-value">
+                  <span>Dokumentoitu</span>
+                  <strong id="progressValue">67%</strong>
+                </article>
+                <article class="big-value big-value-warning">
+                  <span>Kriittiset avoimet</span>
+                  <strong id="heroCritical">2</strong>
+                </article>
               </div>
-
-              <div class="field-grid" id="docFields"></div>
-
-              <div class="handover-note">
-                <h4>Luovutusmuistio</h4>
-                <p id="handoverText">
-                  Kohde on sähköjen, ohjelmiston ja etäyhteyden osalta valmis. Ennen
-                  luovutusta tulee vahvistaa pesukemian mittaustulos, tallentaa lopulliset
-                  annosteluarvot ja täydentää kohdekuvat tietopankkiin.
-                </p>
+              <div class="note-block" id="handoverText">
+                Kohde on sähköjen, ohjelmiston ja etäyhteyden osalta valmis. Ennen luovutusta
+                tulee vahvistaa pesukemian mittaustulos, tallentaa lopulliset annosteluarvot ja
+                täydentää kohdekuvat tietopankkiin.
               </div>
-            </article>
+            </section>
           </div>
         </section>
 
-        <section class="section" id="chemistry">
-          <div class="section-heading">
-            <div>
-              <p class="eyebrow">2. Pesukemia</p>
-              <h2>Annostelu, mittaus ja säätö näkyväksi</h2>
-            </div>
-            <p>
-              Tässä näkymässä nähdään kemikaalikanavat, tavoitearvot, mitatut arvot ja
-              dokumentoitavat havainnot. Pesutulosongelma ei ole aina sähkövika, vaan
-              usein säätö- tai annostelupoikkeama.
-            </p>
-          </div>
-
-          <div class="panel-grid panel-grid-wide">
-            <article class="panel chemistry-panel">
-              <div class="panel-head">
-                <h3>Kemikaalikanavat</h3>
-                <span class="panel-badge">4 kanavaa</span>
+        <section class="view" id="view-chemistry" data-view="chemistry">
+          <div class="grid-two chemistry-layout">
+            <section class="card">
+              <div class="card-head">
+                <h3>Pesukemian kanavat</h3>
+                <span class="badge badge-accent">Mittaus + säätö</span>
               </div>
               <div class="chem-list" id="chemList"></div>
-            </article>
+            </section>
 
-            <article class="panel scenario-detail-panel">
-              <div class="panel-head">
-                <h3 id="scenarioTitle">Pesutulos heikko vahauksen jälkeen</h3>
-                <span class="panel-badge panel-badge-neutral" id="scenarioOutcome">Säädä ja dokumentoi</span>
+            <section class="card">
+              <div class="card-head">
+                <h3>Testipesun havainto</h3>
+                <span class="badge" id="scenarioOutcome">Säädä</span>
               </div>
-
-              <div class="micro-nav" id="scenarioNav"></div>
-
-              <p class="scenario-intro" id="scenarioIntro">
-                Kuivauspisarat jäävät pintaan ja kiilto on heikko. Ennen komponenttien
-                vaihtoa tarkistetaan vaha-kanavan todellinen tuotto.
-              </p>
-
-              <ol class="step-list" id="scenarioSteps"></ol>
-
-              <div class="scenario-footer">
-                <div class="escalation-box">
-                  <h4>Eskaloi vasta kun</h4>
-                  <p id="scenarioEscalation">
-                    kanava on ilmattu, annostelu säädetty tavoitearvoon ja testipesun
-                    jälkeen pesutulos on edelleen heikko.
-                  </p>
-                </div>
-
-                <div class="resolution-box">
-                  <span class="resolution-time" id="scenarioTime">Arvioitu käsittely: 15 min</span>
-                  <p id="scenarioResult">
-                    Useimmat tapaukset ratkeavat mittaamalla todellinen tuotto, säätämällä
-                    arvo kohdalleen ja kirjaamalla uusi asetus dokumentaatioon.
-                  </p>
+              <div class="scenario-nav" id="scenarioNav"></div>
+              <div class="scenario-panel">
+                <h4 id="scenarioTitle">Pesutulos heikko vahauksen jälkeen</h4>
+                <p id="scenarioIntro">
+                  Kuivauspisarat jäävät pintaan ja kiilto on heikko. Ennen komponenttien
+                  vaihtoa tarkistetaan vaha-kanavan todellinen tuotto.
+                </p>
+                <ol class="step-list" id="scenarioSteps"></ol>
+                <div class="note-grid">
+                  <div class="note-block">
+                    <h5>Eskaloi vasta kun</h5>
+                    <p id="scenarioEscalation"></p>
+                  </div>
+                  <div class="note-block note-block-soft">
+                    <h5>Huollon toimenpide</h5>
+                    <p id="scenarioResult"></p>
+                    <span class="tiny-note" id="scenarioTime">Arvioitu käsittely: 15 min</span>
+                  </div>
                 </div>
               </div>
-            </article>
+            </section>
           </div>
         </section>
 
-        <section class="section" id="docs">
-          <div class="section-heading">
-            <div>
-              <p class="eyebrow">3. Oppiva tietopankki</p>
-              <h2>Huolto oppii jokaisesta käyttöönotosta ja poikkeamasta</h2>
-            </div>
-            <p>
-              Tietopankki kokoaa käyttöönottopohjat, kemiamittaukset, päämiehen ohjeet ja
-              huollon mikro-ohjeet samaan paikkaan, jotta tieto ei jää yksittäisen ihmisen varaan.
-            </p>
-          </div>
-
-          <div class="panel-grid panel-grid-wide">
-            <article class="panel docs-panel">
-              <div class="panel-head">
-                <h3>Tietopankki</h3>
+        <section class="view" id="view-knowledge" data-view="knowledge">
+          <div class="grid-two">
+            <section class="card">
+              <div class="card-head">
+                <h3>Huollon oppiva tietopankki</h3>
                 <label class="search-field">
                   <span>Hae</span>
-                  <input
-                    id="docSearch"
-                    type="search"
-                    placeholder="esim. annostelu, vaha, luovutus, päämies"
-                  />
+                  <input id="docSearch" type="search" placeholder="esim. vaha, luovutus, annostelu" />
                 </label>
               </div>
-
-              <div class="doc-filter-row" id="docFilters"></div>
+              <div class="filter-row" id="docFilters"></div>
               <div class="doc-list" id="docList"></div>
-            </article>
+            </section>
 
-            <article class="panel value-panel">
-              <div class="panel-head">
-                <h3>Oppi tästä tapauksesta</h3>
-                <span class="panel-badge">Huollon mikro-ohje</span>
+            <section class="card">
+              <div class="card-head">
+                <h3>Uusi mikro-ohje huollolle</h3>
+                <span class="badge badge-accent">Oppi tapauksesta</span>
               </div>
-              <div class="learning-card">
-                <h4 id="learningTitle">Heikko kuivaus / kiilto</h4>
-                <p id="learningText">
-                  Mittaa vaha-kanavan todellinen tuotto ennen komponenttien vaihtoa.
-                  Tarkista myös ilma letkussa, säädä annostelu ja kirjaa uusi arvo
-                  dokumentaatioon.
+              <div class="micro-guide">
+                <p class="quote" id="learningText">
+                  Heikko kuivaus/kiilto: mittaa vaha-kanavan todellinen tuotto ennen komponenttien vaihtoa.
                 </p>
               </div>
-
-              <ul class="value-list">
-                <li>Dokumentointi ei ole jälkityötä vaan osa laadukasta käyttöönottoa.</li>
-                <li>Kemiamittaus tekee pesutuloksen laadusta todennettavaa eikä arvailtavaa.</li>
-                <li>Huolto saa valmiin tarkastuspolun ennen asiantuntijaeskalointia.</li>
-                <li>Vaikeasta tapauksesta syntyy uusi ohje koko huollon käyttöön.</li>
-              </ul>
-
-              <div class="pitch-box">
-                <h4>Miten tämän voi sanoa haastattelussa</h4>
-                <p>
-                  "Halusin näyttää, että käyttöönottotyökalu ei olisi vain sähkö-checklist.
-                  Sen pitäisi yhdistää sähkö, ohjelmisto, dokumentaatio ja pesuprosessi niin,
-                  että huolto näkee myöhemmin mitä kohteessa on oikeasti mitattu ja säädetty."
-                </p>
+              <div class="info-stack">
+                <div class="info-block">
+                  <h4>Miksi tämä on tärkeä</h4>
+                  <p>Pesutulosongelma ei aina ole sähkövika. Oikea järjestys on mittaa, säädä, testaa ja dokumentoi.</p>
+                </div>
+                <div class="info-block">
+                  <h4>Mitä seuraava huoltaja hyötyy</h4>
+                  <p>Näkee yhdestä paikasta aiemman mittaustuloksen, säädetyn arvon ja hyväksytyn testipesun havainnon.</p>
+                </div>
               </div>
-            </article>
+            </section>
           </div>
         </section>
       </main>
