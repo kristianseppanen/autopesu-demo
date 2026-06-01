@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="fi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Autonpesulaitteiden käyttöönotto- ja huoltotuki | Demo</title>
+    <meta
+      name="description"
+      content="Interaktiivinen demo autonpesulaitteiden käyttöönoton dokumentoinnista, huollon itsepalvelusta ja hallitusta eskaloinnista."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./demo.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Haastatteludemo</p>
+          <h1>Käyttöönotto, dokumentointi ja huollon tuki yhdessä näkymässä</h1>
+          <p class="lead">
+            Demo näyttää, miten autonpesulaitteiden käyttöönotto voidaan vakioida,
+            dokumentoida ja tukea niin, että huolto ratkaisee yleisimmät tilanteet
+            itsenäisesti ja asiantuntijaeskaloinnit vähenevät.
+          </p>
+          <div class="hero-actions">
+            <a href="#commissioning" class="button button-primary">Avaa käyttöönotto</a>
+            <a href="#support" class="button button-secondary">Kokeile huollon tukea</a>
+          </div>
+          <div class="metric-row">
+            <article class="metric-card">
+              <span class="metric-label">Tavoite</span>
+              <strong>Vakioitu käyttöönotto</strong>
+              <p>Vaiheittainen checklist, luovutusmuistio ja dokumentit samassa paikassa.</p>
+            </article>
+            <article class="metric-card">
+              <span class="metric-label">Vaikutus</span>
+              <strong>Vähemmän turhia soittoja</strong>
+              <p>Huolto saa ohjatun vianhaun ja selkeät eskalointikriteerit.</p>
+            </article>
+            <article class="metric-card">
+              <span class="metric-label">Johto</span>
+              <strong>Näkyvyys tilaan</strong>
+              <p>Valmiusaste, avoimet riskit ja kriittiset puutteet näkyvät heti.</p>
+            </article>
+          </div>
+        </div>
+
+        <aside class="hero-panel">
+          <div class="status-card">
+            <div class="status-topline">
+              <span class="status-pill status-live">Live-demo</span>
+              <span class="status-pill">GitHub Pages -valmis</span>
+            </div>
+            <h2>Esimerkkikohde: ABC Länsiväylä</h2>
+            <ul class="signal-list">
+              <li>
+                <span>Käyttöönoton valmius</span>
+                <strong id="heroProgress">58%</strong>
+              </li>
+              <li>
+                <span>Avoimet kriittiset kohdat</span>
+                <strong id="heroCritical">2</strong>
+              </li>
+              <li>
+                <span>Huollon ratkaistavissa</span>
+                <strong id="heroSupport">3/4</strong>
+              </li>
+            </ul>
+            <p class="status-note">
+              Yksi asiantuntija ei ole pullonkaula, kun tieto, mittaukset ja rajatut
+              eskalointipolut ovat valmiina.
+            </p>
+          </div>
+        </aside>
+      </header>
+
+      <main class="dashboard">
+        <section class="section" id="commissioning">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">1. Käyttöönotto</p>
+              <h2>Vakioitu käyttöönottochecklist</h2>
+            </div>
+            <p>
+              Klikkaa vaiheet valmiiksi. Demo päivittää etenemisen, nostaa kriittiset
+              puutteet esiin ja muodostaa luovutusyhteenvedon.
+            </p>
+          </div>
+
+          <div class="panel-grid panel-grid-wide">
+            <article class="panel checklist-panel">
+              <div class="panel-head">
+                <h3>Käyttöönottovaiheet</h3>
+                <span class="panel-badge" id="checklistCounter">4 / 7 valmiina</span>
+              </div>
+
+              <div class="checklist" id="checklist"></div>
+            </article>
+
+            <article class="panel summary-panel">
+              <div class="panel-head">
+                <h3>Luovutusvalmius</h3>
+                <span class="panel-badge panel-badge-accent" id="launchState">Osittain valmis</span>
+              </div>
+
+              <div class="readiness-visual">
+                <div class="readiness-ring">
+                  <div class="readiness-ring-inner">
+                    <strong id="progressValue">58%</strong>
+                    <span>valmiina</span>
+                  </div>
+                </div>
+                <ul class="readiness-points" id="readinessPoints">
+                  <li>Sähkökuvat päivitetty kohteen mukaan</li>
+                  <li>Kemikaaliannostelu odottaa hienosäätöä</li>
+                  <li>Etäyhteys testattu onnistuneesti</li>
+                </ul>
+              </div>
+
+              <div class="handover-note">
+                <h4>Luovutusmuistio</h4>
+                <p id="handoverText">
+                  Kohteen käyttöönotto etenee suunnitellusti. Ennen luovutusta tulee vielä
+                  vahvistaa annosteluarvot ja dokumentoida hätäseis-testin tulos.
+                </p>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" id="support">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">2. Huollon tuki</p>
+              <h2>Ohjattu vianhaku ennen eskalointia</h2>
+            </div>
+            <p>
+              Valitse huoltotilanne. Demo näyttää standardoidut tarkastukset,
+              tarvittavat dokumentit ja sen, ratkaistaanko asia huollossa vai
+              ohjataanko se tuoteasiantuntijalle.
+            </p>
+          </div>
+
+          <div class="panel-grid">
+            <article class="panel scenario-panel">
+              <div class="panel-head">
+                <h3>Huoltoskenaariot</h3>
+                <span class="panel-badge">4 valmista polkua</span>
+              </div>
+
+              <div class="scenario-list" id="scenarioList"></div>
+            </article>
+
+            <article class="panel scenario-detail-panel">
+              <div class="panel-head">
+                <h3 id="scenarioTitle">Maksupääte offline</h3>
+                <span class="panel-badge panel-badge-neutral" id="scenarioOutcome">Ratkeaa huollossa</span>
+              </div>
+
+              <p class="scenario-intro" id="scenarioIntro">
+                Huolto käy läpi verkko-, päätelaite- ja ohjelmistotarkastukset ennen
+                kuin asia nostetaan eteenpäin.
+              </p>
+
+              <ol class="step-list" id="scenarioSteps"></ol>
+
+              <div class="scenario-footer">
+                <div class="escalation-box">
+                  <h4>Eskaloi vasta kun</h4>
+                  <p id="scenarioEscalation">
+                    päätelaite on online, loki on kerätty ja maksutapahtuma silti
+                    epäonnistuu kahdessa peräkkäisessä testissä.
+                  </p>
+                </div>
+
+                <div class="resolution-box">
+                  <span class="resolution-time" id="scenarioTime">Arvioitu käsittely: 12 min</span>
+                  <p id="scenarioResult">
+                    Huolto pystyy palauttamaan yhteyden useimmissa tapauksissa ilman
+                    lisäeskalointia.
+                  </p>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" id="docs">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">3. Dokumentaatio</p>
+              <h2>Tieto järjestykseen koko elinkaaren ajaksi</h2>
+            </div>
+            <p>
+              Simuloitu dokumenttikirjasto näyttää, miten käyttöönottopohjat,
+              mittausohjeet, vianhaku ja päämiehen tekniset ohjeet saadaan haettaviksi.
+            </p>
+          </div>
+
+          <div class="panel-grid panel-grid-wide">
+            <article class="panel docs-panel">
+              <div class="panel-head">
+                <h3>Dokumenttikirjasto</h3>
+                <label class="search-field">
+                  <span>Hae</span>
+                  <input
+                    id="docSearch"
+                    type="search"
+                    placeholder="esim. annostelu, PLC, käyttöönotto"
+                  />
+                </label>
+              </div>
+
+              <div class="doc-filter-row" id="docFilters"></div>
+              <div class="doc-list" id="docList"></div>
+            </article>
+
+            <article class="panel value-panel">
+              <div class="panel-head">
+                <h3>Miksi tämä toimii</h3>
+                <span class="panel-badge">Haastattelupuheenvuoro</span>
+              </div>
+              <ul class="value-list">
+                <li>Yhtenäinen käyttöönotto vähentää asennus- ja luovutusvirheitä.</li>
+                <li>Huollolle rajatut vianhakupolut poistavat turhaa henkilöriippuvuutta.</li>
+                <li>Dokumentit pysyvät päivitettävinä ja versionhallittuina GitHubissa.</li>
+                <li>Johto näkee valmiusasteen, riskit ja toistuvat tukitarpeet yhdestä paikasta.</li>
+              </ul>
+
+              <div class="pitch-box">
+                <h4>Miten tämän voi sanoa haastattelussa</h4>
+                <p>
+                  "Rakensin tämän demon näyttämään, miten dokumentointi ei ole vain
+                  arkistointia, vaan operatiivinen työkalu, joka nopeuttaa käyttöönottoa,
+                  tukee huoltoa ja vähentää tarpeettomia asiantuntijaeskalointeja."
+                </p>
+              </div>
+            </article>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="./demo.js"></script>
+  </body>
+</html>
