@@ -17,33 +17,29 @@
     <link rel="stylesheet" href="./demo.css" />
   </head>
   <body>
-    <header class="site-header">
-      <div class="utility-bar">
-        <div class="utility-inner">
-          <nav class="utility-nav" aria-label="Ylänavigaatio">
-            <a href="#">Yritys</a>
-            <a href="#">Avoimet työpaikat</a>
-            <a href="#">Uutiset</a>
-            <a href="#">Yhteystiedot</a>
-            <a href="#">Huoltoweb</a>
-            <a href="#">Webshop</a>
-          </nav>
-        </div>
-      </div>
-
-      <div class="main-nav-wrap">
-        <div class="main-nav-inner">
+    <header class="app-header">
+      <div class="app-header-inner">
+        <div class="brand-cluster">
           <a class="brand" href="#top">
             <span class="brand-mark">HA</span>
             <span class="brand-text">HuoltoAssist</span>
           </a>
+          <div class="brand-context">
+            <span>Käyttöönotto</span>
+            <span>Huolto</span>
+            <span>Tietopankki</span>
+          </div>
+        </div>
 
-          <nav class="main-nav" aria-label="Päävalikko">
-            <a href="#overview">Autonpesukoneet</a>
-            <a href="#chemistry">Pesuaineet</a>
-            <a href="#commissioning">Palvelut</a>
-            <a href="#knowledge">Tietopankki</a>
-          </nav>
+        <div class="header-status">
+          <div class="header-pill">
+            <span>Kohde</span>
+            <strong>SmartCare Mock 01</strong>
+          </div>
+          <div class="header-pill">
+            <span>Tila</span>
+            <strong>Täydennettävä</strong>
+          </div>
         </div>
       </div>
     </header>
@@ -52,12 +48,11 @@
       <section class="hero">
         <div class="hero-inner">
           <div class="hero-copy">
-            <p class="hero-kicker">HuoltoAssist</p>
-            <h1>Käyttöönoton dokumentaatio, pesukemian mittaus ja huollon tietopankki</h1>
+            <p class="hero-kicker">Käyttöönoton työtila</p>
+            <h1>Kohteen dokumentaatio ja pesukemian säätö samassa näkymässä</h1>
             <p>
-              Käyttöönoton tieto, kemikaalikanavien mittaukset ja huollon mikro-ohjeet samassa
-              näkymässä. Kohteen lähtötilanne, säädöt ja poikkeamat pysyvät näkyvissä koko
-              elinkaaren ajan.
+              Käyttöönoton mittaukset, kemikaalikanavien arvot, testipesun havainnot ja
+              huollon mikro-ohjeet pysyvät samassa työtilassa ilman erillistä tiedonhakua.
             </p>
           </div>
           <div class="hero-metrics" id="topMetrics"></div>
@@ -72,7 +67,7 @@
 
       <section class="content-width section-head" id="overview">
         <div>
-          <p class="section-kicker">Käyttöönotto</p>
+          <p class="section-kicker">HuoltoAssist</p>
           <h2 id="viewTitle">Käyttöönoton dokumentaatio</h2>
         </div>
       </section>
