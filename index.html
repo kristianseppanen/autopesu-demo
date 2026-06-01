@@ -6,7 +6,7 @@
     <title>HuoltoAssist | Käyttöönotto + Kemia + Tietopankki</title>
     <meta
       name="description"
-      content="Konseptidemo käyttöönoton dokumentaatiosta, pesukemian mittauksesta, säädöstä ja huollon oppivasta tietopankista."
+      content="Käyttöönoton dokumentaatio, pesukemian mittaus ja huollon tietopankki."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -17,162 +17,194 @@
     <link rel="stylesheet" href="./demo.css" />
   </head>
   <body>
-    <div class="app-shell">
-      <aside class="sidebar">
-        <div class="brand-block">
-          <div class="brand-mark">HA</div>
-          <div>
-            <h1>HuoltoAssist</h1>
-            <p class="sidebar-copy">Käyttöönotto, pesukemia ja huollon oppiva tietopankki.</p>
-          </div>
+    <header class="site-header">
+      <div class="utility-bar">
+        <div class="utility-inner">
+          <nav class="utility-nav" aria-label="Ylänavigaatio">
+            <a href="#">Yritys</a>
+            <a href="#">Avoimet työpaikat</a>
+            <a href="#">Uutiset</a>
+            <a href="#">Yhteystiedot</a>
+            <a href="#">Huoltoweb</a>
+            <a href="#">Webshop</a>
+          </nav>
         </div>
+      </div>
 
-        <nav class="sidebar-nav" id="navButtons" aria-label="Näkymät"></nav>
-      </aside>
+      <div class="main-nav-wrap">
+        <div class="main-nav-inner">
+          <a class="brand" href="#top">
+            <span class="brand-mark">HA</span>
+            <span class="brand-text">HuoltoAssist</span>
+          </a>
 
-      <main class="workspace">
-        <header class="topbar">
-          <div>
-            <h2 id="viewTitle">Käyttöönoton dokumentaatio</h2>
+          <nav class="main-nav" aria-label="Päävalikko">
+            <a href="#overview">Autonpesukoneet</a>
+            <a href="#chemistry">Pesuaineet</a>
+            <a href="#commissioning">Palvelut</a>
+            <a href="#knowledge">Tietopankki</a>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="hero-inner">
+          <div class="hero-copy">
+            <p class="hero-kicker">HuoltoAssist</p>
+            <h1>Käyttöönoton dokumentaatio, pesukemian mittaus ja huollon tietopankki</h1>
+            <p>
+              Käyttöönoton tieto, kemikaalikanavien mittaukset ja huollon mikro-ohjeet samassa
+              näkymässä. Kohteen lähtötilanne, säädöt ja poikkeamat pysyvät näkyvissä koko
+              elinkaaren ajan.
+            </p>
           </div>
-          <div class="metric-strip" id="topMetrics"></div>
-        </header>
+          <div class="hero-metrics" id="topMetrics"></div>
+        </div>
+      </section>
 
-        <section class="view is-active" id="view-overview" data-view="overview">
-          <div class="hero-card">
-            <div>
-              <p class="eyebrow">SmartCare Mock 01</p>
-              <h3>Käyttöönoton laatu syntyy siitä, mitä jää talteen</h3>
-              <p>
-                Kun kohdetiedot, sähkömittaukset, ohjelmistoversiot, parametrit, pesukemian
-                annostelut, valokuvat ja luovutushuomiot kirjataan samaan runkoon, myöhempi
-                huolto ei joudu arvailemaan lähtötilannetta.
-              </p>
+      <section class="section-tabs">
+        <div class="content-width">
+          <div class="section-tabs-inner" id="navButtons" aria-label="Näkymät"></div>
+        </div>
+      </section>
+
+      <section class="content-width section-head" id="overview">
+        <div>
+          <p class="section-kicker">Käyttöönotto</p>
+          <h2 id="viewTitle">Käyttöönoton dokumentaatio</h2>
+        </div>
+      </section>
+
+      <section class="content-width view is-active" id="view-overview" data-view="overview">
+        <div class="feature-grid">
+          <article class="feature-card feature-card-wide">
+            <div class="feature-head">
+              <h3>Käyttöönotosta talteen jäävä ydin</h3>
+              <span class="badge" id="docStatusBadge">Täydennettävä</span>
             </div>
-            <div class="hero-side">
-              <div class="hero-state">
+            <div class="field-grid" id="overviewFields"></div>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-head">
+              <h3>Kohteen tila</h3>
+            </div>
+            <div class="state-stack">
+              <div class="state-card">
                 <span>Valmiusaste</span>
                 <strong id="overviewProgress">67%</strong>
               </div>
-              <div class="hero-state">
+              <div class="state-card">
                 <span>Avoimet kohdat</span>
                 <strong id="overviewOpen">3</strong>
               </div>
             </div>
-          </div>
+          </article>
+        </div>
+      </section>
 
-          <div class="grid-two">
-            <section class="card">
-              <div class="card-head">
-                <h3>Käyttöönotosta talteen jäävä ydin</h3>
-                <span class="badge" id="docStatusBadge">Täydennettävä</span>
-              </div>
-              <div class="field-grid" id="overviewFields"></div>
-            </section>
-          </div>
-        </section>
+      <section class="content-width view" id="view-commissioning" data-view="commissioning">
+        <div class="feature-grid">
+          <article class="feature-card feature-card-wide">
+            <div class="feature-head">
+              <h3>Käyttöönoton laatupassi</h3>
+              <span class="badge" id="checklistCounter">6 / 9 valmiina</span>
+            </div>
+            <div class="checklist" id="checklist"></div>
+          </article>
 
-        <section class="view" id="view-commissioning" data-view="commissioning">
-          <div class="grid-two">
-            <section class="card">
-              <div class="card-head">
-                <h3>Käyttöönoton laatupassi</h3>
-                <span class="badge" id="checklistCounter">6 / 9 valmiina</span>
+          <article class="feature-card">
+            <div class="feature-head">
+              <h3>Luovutusvalmius</h3>
+              <span class="badge" id="handoverBadge">Täydennettävä</span>
+            </div>
+            <div class="state-stack">
+              <div class="state-card">
+                <span>Dokumentoitu</span>
+                <strong id="progressValue">67%</strong>
               </div>
-              <div class="checklist" id="checklist"></div>
-            </section>
+              <div class="state-card state-card-warn">
+                <span>Kriittiset avoimet</span>
+                <strong id="heroCritical">2</strong>
+              </div>
+            </div>
+            <div class="info-panel" id="handoverText">
+              Kohde on sähköjen, ohjelmiston ja etäyhteyden osalta valmis. Ennen luovutusta
+              tulee vahvistaa pesukemian mittaustulos, tallentaa lopulliset annosteluarvot ja
+              täydentää kohdekuvat tietopankkiin.
+            </div>
+          </article>
+        </div>
+      </section>
 
-            <section class="card">
-              <div class="card-head">
-                <h3>Luovutusvalmius</h3>
-                <span class="badge" id="handoverBadge">Täydennettävä ennen luovutusta</span>
-              </div>
-              <div class="big-values">
-                <article class="big-value">
-                  <span>Dokumentoitu</span>
-                  <strong id="progressValue">67%</strong>
-                </article>
-                <article class="big-value big-value-warning">
-                  <span>Kriittiset avoimet</span>
-                  <strong id="heroCritical">2</strong>
-                </article>
-              </div>
-              <div class="note-block" id="handoverText">
-                Kohde on sähköjen, ohjelmiston ja etäyhteyden osalta valmis. Ennen luovutusta
-                tulee vahvistaa pesukemian mittaustulos, tallentaa lopulliset annosteluarvot ja
-                täydentää kohdekuvat tietopankkiin.
-              </div>
-            </section>
-          </div>
-        </section>
+      <section class="content-width view" id="view-chemistry" data-view="chemistry">
+        <div class="feature-grid">
+          <article class="feature-card feature-card-wide">
+            <div class="feature-head">
+              <h3>Pesukemian kanavat</h3>
+              <span class="badge badge-accent">Mittaus + säätö</span>
+            </div>
+            <div class="chem-list" id="chemList"></div>
+          </article>
 
-        <section class="view" id="view-chemistry" data-view="chemistry">
-          <div class="grid-two chemistry-layout">
-            <section class="card">
-              <div class="card-head">
-                <h3>Pesukemian kanavat</h3>
-                <span class="badge badge-accent">Mittaus + säätö</span>
+          <article class="feature-card">
+            <div class="feature-head">
+              <h3>Testipesun havainto</h3>
+              <span class="badge" id="scenarioOutcome">Säädä</span>
+            </div>
+            <div class="scenario-nav" id="scenarioNav"></div>
+            <div class="scenario-panel">
+              <h4 id="scenarioTitle">Heikko kuivaus / kiilto</h4>
+              <p id="scenarioIntro"></p>
+              <ol class="step-list" id="scenarioSteps"></ol>
+              <div class="info-panel">
+                <h5>Eskaloi vasta kun</h5>
+                <p id="scenarioEscalation"></p>
               </div>
-              <div class="chem-list" id="chemList"></div>
-            </section>
+              <div class="info-panel info-panel-soft">
+                <h5>Huollon toimenpide</h5>
+                <p id="scenarioResult"></p>
+                <span class="tiny-note" id="scenarioTime"></span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
 
-            <section class="card">
-              <div class="card-head">
-                <h3>Testipesun havainto</h3>
-                <span class="badge" id="scenarioOutcome">Säädä</span>
-              </div>
-              <div class="scenario-nav" id="scenarioNav"></div>
-              <div class="scenario-panel">
-                <h4 id="scenarioTitle">Pesutulos heikko vahauksen jälkeen</h4>
-                <p id="scenarioIntro">
-                  Kuivauspisarat jäävät pintaan ja kiilto on heikko. Ennen komponenttien
-                  vaihtoa tarkistetaan vaha-kanavan todellinen tuotto.
-                </p>
-                <ol class="step-list" id="scenarioSteps"></ol>
-                <div class="note-grid">
-                  <div class="note-block">
-                    <h5>Eskaloi vasta kun</h5>
-                    <p id="scenarioEscalation"></p>
-                  </div>
-                  <div class="note-block note-block-soft">
-                    <h5>Huollon toimenpide</h5>
-                    <p id="scenarioResult"></p>
-                    <span class="tiny-note" id="scenarioTime">Arvioitu käsittely: 15 min</span>
-                  </div>
-                </div>
-              </div>
-            </section>
-          </div>
-        </section>
+      <section class="content-width view" id="view-knowledge" data-view="knowledge">
+        <div class="feature-grid">
+          <article class="feature-card feature-card-wide">
+            <div class="feature-head">
+              <h3>Tietopankki</h3>
+              <label class="search-field">
+                <span>Hae</span>
+                <input id="docSearch" type="search" placeholder="esim. vaha, luovutus, annostelu" />
+              </label>
+            </div>
+            <div class="filter-row" id="docFilters"></div>
+            <div class="doc-list" id="docList"></div>
+          </article>
 
-        <section class="view" id="view-knowledge" data-view="knowledge">
-          <div class="grid-two">
-            <section class="card">
-              <div class="card-head">
-                <h3>Huollon oppiva tietopankki</h3>
-                <label class="search-field">
-                  <span>Hae</span>
-                  <input id="docSearch" type="search" placeholder="esim. vaha, luovutus, annostelu" />
-                </label>
-              </div>
-              <div class="filter-row" id="docFilters"></div>
-              <div class="doc-list" id="docList"></div>
-            </section>
+          <article class="feature-card">
+            <div class="feature-head">
+              <h3>Huollon mikro-ohje</h3>
+            </div>
+            <div class="quote-panel">
+              <p id="learningText"></p>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
 
-            <section class="card">
-              <div class="card-head">
-                <h3>Uusi mikro-ohje huollolle</h3>
-              </div>
-              <div class="micro-guide">
-                <p class="quote" id="learningText">
-                  Heikko kuivaus/kiilto: mittaa vaha-kanavan todellinen tuotto ennen komponenttien vaihtoa.
-                </p>
-              </div>
-            </section>
-          </div>
-        </section>
-      </main>
-    </div>
+    <footer class="site-footer">
+      <div class="content-width footer-inner">
+        <p>HuoltoAssist</p>
+        <p>Käyttöönotto, pesukemia ja tietopankki</p>
+      </div>
+    </footer>
 
     <script src="./demo.js"></script>
   </body>
