@@ -53,7 +53,6 @@ input {
 }
 
 .app-header-inner,
-.hero-inner,
 .footer-inner {
   width: var(--content);
   margin: 0 auto;
@@ -143,72 +142,32 @@ input {
   font-size: 0.92rem;
 }
 
-.hero {
-  background:
-    linear-gradient(120deg, rgba(51, 66, 77, 0.98), rgba(66, 85, 96, 0.94)),
-    radial-gradient(circle at right top, rgba(240, 173, 55, 0.2), transparent 24%);
-  color: white;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-.hero-inner {
-  display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(280px, auto);
-  gap: 24px;
-  padding: 28px 0 34px;
-  align-items: center;
-}
-
-.hero-kicker,
 .section-kicker {
   margin: 0 0 10px;
-  color: rgba(255, 255, 255, 0.72);
+  color: var(--warn);
   font-size: 0.8rem;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
-.section-kicker {
-  color: var(--warn);
-}
-
-.hero h1,
 .section-head h2,
 .feature-head h3 {
   margin: 0;
-}
-
-.hero h1 {
-  max-width: 14ch;
-  font-size: clamp(2rem, 3.4vw, 3.25rem);
-  line-height: 1;
-}
-
-.hero p {
-  max-width: 58ch;
-  margin: 12px 0 0;
-  color: rgba(255, 255, 255, 0.78);
-  line-height: 1.65;
-}
-
-.hero-metrics {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(110px, 1fr));
-  gap: 12px;
 }
 
 .metric-tile {
   min-width: 0;
   padding: 14px 16px;
   border-radius: var(--radius-md);
-  background: rgba(255, 255, 255, 0.07);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
 }
 
 .metric-tile span {
   display: block;
-  color: rgba(255, 255, 255, 0.72);
+  color: var(--muted);
   font-size: 0.78rem;
 }
 
@@ -216,6 +175,7 @@ input {
   display: block;
   margin-top: 8px;
   font-size: 1.5rem;
+  color: var(--dark);
 }
 
 .section-tabs {
@@ -264,11 +224,25 @@ input {
 
 .section-head {
   padding: 24px 0 18px;
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  align-items: end;
 }
 
 .section-head h2 {
   font-size: clamp(1.9rem, 3vw, 3rem);
   color: var(--dark);
+}
+
+.section-head-main {
+  max-width: 760px;
+}
+
+.head-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(120px, 1fr));
+  gap: 12px;
 }
 
 .view {
@@ -531,10 +505,14 @@ input {
 
 @media (max-width: 1080px) {
   .app-header-inner,
-  .hero-inner,
   .feature-grid,
   .footer-inner {
     grid-template-columns: 1fr;
+    flex-direction: column;
+    align-items: start;
+  }
+
+  .section-head {
     flex-direction: column;
     align-items: start;
   }
@@ -545,6 +523,7 @@ input {
 }
 
 @media (max-width: 760px) {
+  .head-metrics,
   .field-grid,
   .chem-card-head,
   .chem-metrics {
