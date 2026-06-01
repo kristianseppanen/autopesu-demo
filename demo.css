@@ -489,6 +489,96 @@ input {
   line-height: 1.75;
 }
 
+.service-case,
+.service-pack,
+.service-checklist {
+  display: grid;
+  gap: 14px;
+}
+
+.service-topline,
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.service-label {
+  margin: 0 0 6px;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.service-topline h4 {
+  margin: 0;
+  font-size: 1.35rem;
+  color: var(--dark);
+}
+
+.service-status {
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--surface-soft);
+}
+
+.service-status span {
+  display: block;
+  color: var(--muted);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.service-status strong {
+  display: block;
+  margin-top: 6px;
+  font-size: 1.1rem;
+}
+
+.service-check-row {
+  display: grid;
+  grid-template-columns: 42px 1fr;
+  gap: 12px;
+  align-items: start;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--surface-soft);
+}
+
+.service-step-index {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--dark);
+  color: white;
+  font-weight: 800;
+}
+
+.service-check-row strong {
+  display: block;
+  margin-bottom: 6px;
+}
+
+.service-check-row p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.plain-list {
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 8px;
+  color: var(--text);
+}
+
 .site-footer {
   margin-top: 20px;
   background: var(--dark);
@@ -523,6 +613,8 @@ input {
 }
 
 @media (max-width: 760px) {
+  .service-topline,
+  .service-grid,
   .head-metrics,
   .field-grid,
   .chem-card-head,

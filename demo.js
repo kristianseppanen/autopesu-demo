@@ -18,6 +18,12 @@ const views = [
     title: "Pesukemian mittaus ja säätö",
   },
   {
+    id: "service",
+    label: "Huolto",
+    detail: "Avoin tapaus ja eskalointipaketti",
+    title: "Huollon työtila",
+  },
+  {
     id: "knowledge",
     label: "Tietopankki",
     detail: "Huollon oppiva mikro-ohje",
@@ -234,6 +240,32 @@ const documents = [
   },
 ];
 
+const serviceCase = {
+  title: "Heikko kuivaus vahauksen jälkeen",
+  state: "Huolto käsittelee",
+  observation:
+    "Asiakas raportoi, että testipesun jälkeen pintaan jää vesipisaroita ja kiilto jää vajaaksi.",
+  cause:
+    "Vaha-kanavan mitattu tuotto jää alle tavoitearvon, jolloin kuivauksen lopputulos heikkenee.",
+  escalation:
+    "mittaus, ilmaus, säätö ja uusi testipesu on tehty eikä pesutulos silti korjaannu.",
+  outcome:
+    "Huollon tavoite on ratkaista tapaus paikan päällä ja siirtää asiantuntijalle vain valmis aineisto.",
+  checklist: [
+    "Tarkista kohteen viimeisin käyttöönoton mittaus ja annosteluarvo.",
+    "Mittaa vaha-kanavan todellinen tuotto 30 sekunnin testijaksolla.",
+    "Ilmaa kanava ja tarkista mahdollinen ilmavuoto tai tukos.",
+    "Säädä annostelu tavoitearvoon ja tee uusi testipesu.",
+    "Kirjaa uusi arvo, havainto ja lopputulos tietopankkiin.",
+  ],
+  evidence: [
+    "Mitattu ml/min-arvo ennen säätöä",
+    "Mitattu ml/min-arvo säädön jälkeen",
+    "Valokuva tai havainto testipesun lopputuloksesta",
+    "Mahdollinen loki tai huomio ilmauksesta / tukoksesta",
+  ],
+};
+
 const navButtons = document.querySelector("#navButtons");
 const topMetrics = document.querySelector("#topMetrics");
 const viewTitle = document.querySelector("#viewTitle");
@@ -260,6 +292,14 @@ const scenarioResult = document.querySelector("#scenarioResult");
 const scenarioOutcome = document.querySelector("#scenarioOutcome");
 const scenarioTime = document.querySelector("#scenarioTime");
 const learningText = document.querySelector("#learningText");
+const serviceTitle = document.querySelector("#serviceTitle");
+const serviceState = document.querySelector("#serviceState");
+const serviceObservation = document.querySelector("#serviceObservation");
+const serviceCause = document.querySelector("#serviceCause");
+const serviceChecklist = document.querySelector("#serviceChecklist");
+const serviceEvidence = document.querySelector("#serviceEvidence");
+const serviceEscalationText = document.querySelector("#serviceEscalationText");
+const serviceOutcome = document.querySelector("#serviceOutcome");
 
 const docSearch = document.querySelector("#docSearch");
 const docFilters = document.querySelector("#docFilters");
@@ -387,6 +427,36 @@ function renderChemistry() {
   });
 }
 
+function renderServiceCase() {
+  serviceTitle.textContent = serviceCase.title;
+  serviceState.textContent = serviceCase.state;
+  serviceObservation.textContent = serviceCase.observation;
+  serviceCause.textContent = serviceCase.cause;
+  serviceEscalationText.textContent = serviceCase.escalation;
+  serviceOutcome.textContent = serviceCase.outcome;
+
+  serviceChecklist.innerHTML = "";
+  serviceCase.checklist.forEach((item, index) => {
+    const row = document.createElement("article");
+    row.className = "service-check-row";
+    row.innerHTML = `
+      <span class="service-step-index">${index + 1}</span>
+      <div>
+        <strong>Huollon vaihe ${index + 1}</strong>
+        <p>${item}</p>
+      </div>
+    `;
+    serviceChecklist.appendChild(row);
+  });
+
+  serviceEvidence.innerHTML = "";
+  serviceCase.evidence.forEach((item) => {
+    const li = document.createElement("li");
+    li.textContent = item;
+    serviceEvidence.appendChild(li);
+  });
+}
+
 function renderScenarioNav() {
   scenarioNav.innerHTML = "";
   scenarios.forEach((scenario) => {
@@ -464,6 +534,7 @@ renderOverviewFields();
 renderChecklist();
 updateChecklistSummary();
 renderChemistry();
+renderServiceCase();
 renderScenarioNav();
 updateScenario();
 renderDocFilters();
